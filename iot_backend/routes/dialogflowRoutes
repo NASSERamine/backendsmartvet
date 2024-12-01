@@ -1,0 +1,24 @@
+const express = require("express");
+const router = express.Router();
+const dialogflowService = require("../services/dialogflowService");
+
+// Endpoint pour interagir avec Dialogflow
+router.post("/", async (req, res) => {
+  const { message, sessionId } = req.body;
+
+  if (!message || !sessionId) {
+    return res
+      .status(400)
+      .json({ error: "Message and sessionId are required." });
+  }
+
+  try {
+    const response = await dialogflowService.processMessage(message, sessionId);
+    res.json(response);
+  } catch (error) {
+    console.error("Error connecting to Dialogflow:", error);
+    res.status(500).json({ error: "Failed to process the request." });
+  }
+});
+
+module.exports = router;

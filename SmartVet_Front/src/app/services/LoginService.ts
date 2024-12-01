@@ -15,24 +15,4 @@ export class LoginService {
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { username, password });
   }
-
-  // Sauvegarder le token dans le localStorage
-  saveToken(token: string): void {
-    localStorage.setItem('authToken', token);
-  }
-
-  // Récupérer le token depuis le localStorage
-  getToken(): string | null {
-    return localStorage.getItem('authToken');
-  }
-
-  // Déconnexion et suppression du token
-  logout(): void {
-    localStorage.removeItem('authToken');
-  }
-
-  // Vérification si l'utilisateur est authentifié (token présent)
-  isAuthenticated(): boolean {
-    return !!this.getToken();
-  }
 }

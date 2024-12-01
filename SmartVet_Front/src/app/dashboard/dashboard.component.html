@@ -1,0 +1,114 @@
+<div class="dashboard-container">
+  <app-side-bar></app-side-bar>
+
+  <div class="dashboard-content">
+    <div class="dashboard-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p class="text-muted">Good Morning,</p>
+          <h2>William Johnson</h2>
+        </div>
+        <div class="d-flex align-items-center">
+          <i class="fas fa-bell text-muted fs-4 me-3"></i>
+          <img src="assets/profile.jpg" alt="Profile" class="rounded-circle" width="50" height="50" />
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" id="tab-1" data-bs-toggle="tab" href="#content-1">Tab 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#content-2">Tab 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#content-3">Tab 3</a>
+        </li>
+      </ul>
+      <button class="btn  add-animal-button ms-3">Add Animal</button>
+    </div>
+
+    <div class="tab-content mt-4">
+      <div class="tab-pane fade show active" id="content-1">
+        <div class="row">
+          <!-- First Column -->
+          <div class="col-lg-2 col-md-6 mb-4">
+              <div>
+                <img src="assets/avatar.png" alt="Animal Avatar" class="mb-2" width="80" height="80" />
+                <h5 class="fw-bold  mb-1" id="name">Marlie</h5>
+                <p class="text-muted mb-0 " id="age">1 year old</p>
+              </div>
+            <div class="card2 p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <img src="assets/termo.png" alt="Temperature" class="rounded-circle mb-2" width="85" />
+                <div>
+                  <h5 class="fw-bold mb-1">Temperature</h5>
+                  <h1 class="fw-bold mb-1" id="temp">36.5°C</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card3 p-3">
+                <div>
+                  <h5 class="fw-bold mb-1">Heart Rate</h5>
+                  <img src="assets/heart.png" alt="Heart Rate" class="mb-2" width="280" />
+                  <div class="d-flex align-items-center">
+                    <h1 class="fw-bold mb-1" id="heart">102</h1>
+                    <h4 class="mb-1">bpm</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4">
+            <app-location></app-location>
+          </div>
+
+          <!-- Third Column -->
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="medication-card">
+              <div class="card-header">
+                <h3>Medications</h3>
+                <button class="add-button">+</button>
+              </div>
+              <div class="card-content">
+                <div class="medication-item">
+                  <div>
+                    <p class="medication-name">Vitamin D</p>
+                    <p class="medication-detail">1 tablet every day</p>
+                  </div>
+                  <button class="options-button">⋮</button>
+                </div>
+                <div class="medication-item">
+                  <div>
+                    <p class="medication-name">Meloxicam</p>
+                    <p class="medication-detail">1 tablet every 3 days</p>
+                  </div>
+                  <button class="options-button">⋮</button>
+                </div>
+                <div class="medication-item">
+                  <div>
+                    <p class="medication-name">Atenolol</p>
+                    <p class="medication-detail">1 tablet per month</p>
+                  </div>
+                  <button class="options-button">⋮</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="content-2">
+        <p>Content for the second tab goes here.</p>
+      </div>
+
+      <div class="tab-pane fade" id="content-3">
+        <p>Content for the third tab goes here.</p>
+      </div>
+    </div>
+  </div>
+</div>

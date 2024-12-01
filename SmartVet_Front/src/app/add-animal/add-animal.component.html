@@ -9,7 +9,7 @@
     <div class="card p-5 shadow-lg rounded" style="width: 100%; max-width: 400px;">
       <h2 class="mb-4" style="color: #24275c;">Add Animal</h2>
 
-      <form>
+      <form (ngSubmit)="submitAnimal()" #animalForm="ngForm">
         <!-- Animal Name Field -->
         <div class="form-group mb-4">
           <label for="animalName" class="form-label text-muted"><i class="fas fa-paw"></i> Animal Name</label>
@@ -44,7 +44,9 @@
         <div class="d-grid gap-2">
           <button type="submit" class="btn custom-btn">Add Animal</button>
         </div>
+
       </form>
+      <p *ngIf="message">{{ message }}</p>
     </div>
   </div>
 

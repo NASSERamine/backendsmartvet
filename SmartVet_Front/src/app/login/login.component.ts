@@ -16,7 +16,6 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
-  // Fonction appelée lors de la soumission du formulaire de login
   onLogin(): void {
     if (this.username && this.password) {
       // Appel à la méthode login du service loginService
@@ -24,16 +23,26 @@ export class LoginComponent {
         (response) => {
           // Sauvegarder le token reçu dans le localStorage
           this.loginService.saveToken(response.token);
+  
+          // Afficher un message dans la console
+          console.log('Connexion réussie. Bienvenue,', this.username);
+  
           // Rediriger vers une page sécurisée (exemple : tableau de bord)
           this.router.navigate(['/dashboard']);
         },
         (error) => {
           // Affichage d'un message d'erreur si la connexion échoue
           this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect';
+  
+          // Afficher un message d'erreur dans la console
+          console.error('Erreur de connexion :', error.message);
         }
       );
     } else {
       this.errorMessage = 'Veuillez remplir tous les champs';
+  
+      // Message dans la console pour les champs vides
+      console.warn('Tous les champs sont obligatoires.');
     }
   }
 }

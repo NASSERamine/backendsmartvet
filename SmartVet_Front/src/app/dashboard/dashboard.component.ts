@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TemperatureService } from '../services/temperature.service'; // Importez le service
+import { TemperatureService } from '../services/temperature.service'; // Service pour la température
+import { HeartRateService } from '../services/heart-rate-service.service'; // Service pour la fréquence cardiaque
 
 @Component({
   selector: 'app-dashboard',
@@ -8,29 +9,53 @@ import { TemperatureService } from '../services/temperature.service'; // Importe
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  temperature: string = ''; // Déclarez une variable pour stocker la température
+  temperature: string = ''; // Variable pour afficher la température
+  heartRate: string = '';
 
-  constructor(private router: Router, private temperatureService: TemperatureService) {} // Injectez le service dans le constructeur
+  constructor(
+    private router: Router,
+    private temperatureService: TemperatureService, // Service pour la température
+    private heartRateService: HeartRateService // Service pour la fréquence cardiaque
+  ) {}
 
   ngOnInit() {
-    this.loadTemperature(); // Chargez la température au démarrage du composant
+    this.loadTemperature(); // Charger la température au démarrage
+    this.loadHeartRate(); // Charger la fréquence cardiaque au démarrage
   }
 
-  // Fonction pour récupérer la température via le service
+  // Récupération de la température
   loadTemperature() {
     this.temperatureService.getTemperature().subscribe(
-      (data) => {
-        // Formatez la température avec deux décimales
-        this.temperature = parseFloat(data.temperature).toFixed(2) + '°C'; // Assurez-vous que la température soit un nombre et formatez-la
+      (data: any) => {
+        if (data && data.temperature) {
+          this.temperature = parseFloat(data.temperature).toFixed(2) + '°C';
+        } else {
+          console.error('Réponse invalide pour la température :', data);
+          this.temperature = 'N/A';
+        }
       },
-      (error) => {
-        console.error('Error fetching temperature', error);
+      (error: any) => {
+        console.error('Erreur lors de la récupération de la température', error);
+        this.temperature = 'Erreur';
       }
     );
   }
 
-  // Fonction pour naviguer vers la page d'ajout d'animal
+  // Récupération de la fréquence cardiaque
+  loadHeartRate() {
+    this.heartRateService.getHeartRate().subscribe(
+      (heartRate: number) => {
+        this.heartRate = `${heartRate} `; // Format de la fréquence cardiaque
+      },
+      (error: any) => {
+        console.error('Erreur lors de la récupération de la fréquence cardiaque', error);
+        this.heartRate = 'Erreur';
+      }
+    );
+  }
+
+  // Navigation vers la page d'ajout d'animal
   navigateToAdd() {
-    this.router.navigate(['/add-animal']); // Remplacez par le chemin correct pour la page "Add Animal"
+    this.router.navigate(['/add-animal']);
   }
 }

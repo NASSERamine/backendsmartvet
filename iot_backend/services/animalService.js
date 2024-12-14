@@ -1,27 +1,32 @@
 const { db } = require("../config/firebaseConfig"); // Importer la config Firebase
 
 // Fonction pour ajouter un animal
-const addAnimal = async (animalId, name, age, type) => {
+const addAnimal = async (name, age, type, weight) => {
   try {
     const ref = db.ref("animals"); // Référence dans la base de données
-    const animalRef = ref.child(animalId); // Référence de l'animal spécifique
+    const newAnimalRef = ref.push(); // Générer un ID unique
 
-    // Ajouter un animal dans la base de données
-    await animalRef.set({
+    const animalId = newAnimalRef.key; // Récupérer l'ID généré
+    const animalData = {
+      id: animalId,
       name: name,
       age: age,
       type: type,
+      weight: weight,
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(), // Date de mise à jour
-    });
+      updatedAt: new Date().toISOString(),
+    };
 
-    return { message: "Animal ajouté avec succès !" };
+    // Ajouter un animal dans la base de données
+    await newAnimalRef.set(animalData);
+
+    return { message: "Animal ajouté avec succès !", data: animalData };
   } catch (error) {
     throw new Error("Erreur lors de l'ajout de l'animal : " + error.message);
   }
 };
 
-// Fonction pour récupérer un animal par son ID
+// Autres fonctions (inchangées)
 const getAnimalById = async (animalId) => {
   try {
     const ref = db.ref("animals");
@@ -40,18 +45,17 @@ const getAnimalById = async (animalId) => {
   }
 };
 
-// Fonction pour mettre à jour un animal
-const updateAnimal = async (animalId, name, age, type) => {
+const updateAnimal = async (animalId, name, age, type, weight) => {
   try {
     const ref = db.ref("animals");
     const animalRef = ref.child(animalId);
 
-    // Mettre à jour l'animal dans la base de données
     await animalRef.update({
       name: name,
       age: age,
       type: type,
-      updatedAt: new Date().toISOString(), // Date de mise à jour
+      weight: weight,
+      updatedAt: new Date().toISOString(),
     });
 
     return { message: "Animal mis à jour avec succès !" };
@@ -62,13 +66,11 @@ const updateAnimal = async (animalId, name, age, type) => {
   }
 };
 
-// Fonction pour supprimer un animal
 const deleteAnimal = async (animalId) => {
   try {
     const ref = db.ref("animals");
     const animalRef = ref.child(animalId);
 
-    // Supprimer l'animal dans la base de données
     await animalRef.remove();
 
     return { message: "Animal supprimé avec succès !" };

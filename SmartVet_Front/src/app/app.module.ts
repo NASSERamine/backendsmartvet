@@ -11,7 +11,6 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LocationComponent } from './location/location.component';
 import { FormsModule } from '@angular/forms';
-import { AddAnimalService } from './services/add-animal.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 

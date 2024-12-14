@@ -1,4 +1,4 @@
-const { registerUser, loginUser } = require("../services/authService");
+const { registerUser, loginUser ,getNameByEmail} = require("../services/authService");
 
 // Inscription d'un utilisateur
 const register = async (req, res) => {
@@ -56,4 +56,23 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const NameByEmail = async (req, res) => {
+  const { email } = req.params.email;
+
+  if (!email) {
+    return res.status(400).json({ message: "L'email est requis." });
+  }
+
+  try {
+    const userName = await getNameByEmail(email);
+    if (!userName) {
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
+    res.status(200).json({ name: userName });
+  } catch (error) {
+    res.status(500).json({ message: "Erreur de récupération du nom", error: error.message });
+  }
+};
+
+
+module.exports = { register, login ,NameByEmail};

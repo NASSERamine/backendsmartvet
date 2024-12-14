@@ -40,4 +40,18 @@ const loginUser = async (email, password) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+// Get user name by email
+const getNameByEmail = async (email) => {
+  try {
+    // Fetch user information by email from Firebase Authentication
+    const user = await auth.getUserByEmail(email);
+    if (!user) throw new Error("User not found");
+
+    // Return the display name of the user
+    return user.displayName;
+  } catch (error) {
+    throw new Error("Error retrieving user name: " + error.message);
+  }
+};
+
+module.exports = { registerUser, loginUser ,getNameByEmail };

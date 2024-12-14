@@ -23,7 +23,7 @@ export class LoginComponent {
         (response) => {
           // Sauvegarder le token reçu dans le localStorage
           this.loginService.saveToken(response.token);
-  
+          this.loginService.saveUserEmail(this.username);
           // Afficher un message dans la console
           console.log('Connexion réussie. Bienvenue,', this.username);
   

@@ -13,6 +13,7 @@ import { LocationComponent } from './location/location.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChatBotComponent } from './chat-bot/chat-bot.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ChatBotComponent } from './chat-bot/chat-bot.component';
     DashboardComponent,
     LocationComponent,
     ChatBotComponent,
+    StatisticsComponent,
   
 
   ],

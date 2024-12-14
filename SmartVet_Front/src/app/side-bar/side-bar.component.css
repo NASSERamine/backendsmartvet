@@ -1,4 +1,3 @@
-/* Sidebar container */
 .sidebar {
   width: 100px; /* Initially narrow to only show icons */
   height: 100%;
@@ -84,6 +83,10 @@
   transition: opacity 0.3s ease;
 }
 
+/*.menu-item.active {
+  background-color: #E6F3F8;
+  font-weight: bold;
+}*/
 .sidebar:hover .menu-item span {
   opacity: 1; /* Text becomes visible when sidebar is expanded */
 }

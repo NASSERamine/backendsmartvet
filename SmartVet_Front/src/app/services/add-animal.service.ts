@@ -14,6 +14,9 @@ export class AddAnimalService {
 
   // Méthode pour ajouter un animal
   addAnimal(animal: any): Observable<any> {
+  
     return this.http.post(this.apiUrl, animal); // Envoie de la requête POST à l'API
   }
+
+  
 }

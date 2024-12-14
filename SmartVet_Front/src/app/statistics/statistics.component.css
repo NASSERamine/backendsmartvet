@@ -1,0 +1,10 @@
+.stat-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f9f9ff;
+  }
+
+  .stat-content {
+    flex: 1; /* Occupy remaining space */
+    padding: 20px;
+  }

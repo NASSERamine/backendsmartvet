@@ -49,8 +49,8 @@ export class DashboardComponent implements OnInit {
   // Récupération de la fréquence cardiaque
   loadHeartRate() {
     this.heartRateService.getHeartRate().subscribe(
-      (heartRate: number) => {
-        this.heartRate = `${heartRate} `; // Format de la fréquence cardiaque
+      (data: { heartRate: number; timestamp: string }) => {
+        this.heartRate = `${data.heartRate} `; // Format de la fréquence cardiaque
       },
       (error: any) => {
         console.error('Erreur lors de la récupération de la fréquence cardiaque', error);

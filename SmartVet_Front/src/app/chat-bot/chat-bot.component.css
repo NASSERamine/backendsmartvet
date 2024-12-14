@@ -1,8 +1,8 @@
 .chat-container {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    width: 300px;
+    right: 30px;
+    width: 400px;
     height: 520px;
     border: 1px solid #4ea6cc;
     border-radius: 8px;

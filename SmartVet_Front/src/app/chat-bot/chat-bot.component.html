@@ -1,0 +1,28 @@
+<div class="chat-container" [class.collapsed]="isCollapsed">
+    <div class="chat-header" (click)="toggleChat()">
+      
+      <div class="collapse-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="message-indicator" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>
+      </div>
+    </div>
+    <div class="chat-messages">
+      <div class="message bot">
+        <div class="message-content">Hello! How can I assist you today?</div>
+      </div>
+      <div class="message user">
+        <div class="message-content">Hi there! I have a question about the new feature.</div>
+      </div>
+      <div class="message bot">
+        <div class="message-content">Of course! I'd be happy to help. What would you like to know about the new feature?</div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type your message..." (keyup.enter)="sendMessage()">
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+  
+  

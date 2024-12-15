@@ -1,5 +1,10 @@
-
-<div class="notification" *ngIf="isVisible">
-    <p>{{ message }}</p>
-  </div>
-  
+<div class="notifications">
+  <h2>Notifications</h2>
+  <ul>
+    <li *ngFor="let notification of notifications">
+      <strong>{{ notification.message }}</strong>
+      <p>Horodatage : {{ notification.timestamp | date: 'short' }}</p>
+      <pre>{{ notification.sensorData | json }}</pre>
+    </li>
+  </ul>
+</div>

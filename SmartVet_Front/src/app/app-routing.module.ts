@@ -8,6 +8,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { AddMedicationComponent } from './add-medication/add-medication.component';
 import { ProfilComponent } from './profil/profil.component';
+import { NotificationComponent } from './notification/notification.component';
+
 
 
 const routes: Routes = [
@@ -23,7 +25,9 @@ const routes: Routes = [
 
 
 
-  }
+  },
+  {path:'notifications ',component:NotificationComponent}
+  
 ];
 
 

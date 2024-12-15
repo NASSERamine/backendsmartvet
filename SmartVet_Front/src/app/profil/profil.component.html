@@ -1,20 +1,3 @@
-<div class="profile-container">
-    <div class="profile-header">
-      <img
-        src="assets/profil.png"
-        alt="Profile Image"
-        class="profile-image"
-        width="100"
-        height="100"
-        (click)="openProfileMenu()"
-      />
-      <div class="profile-info">
-        <h2>{{ userName }}</h2>
-        <p>{{ userEmail }}</p>
-      </div>
-    </div>
-  </div>
-  
   <!-- Profile Modal -->
   <div *ngIf="isProfileMenuOpen" class="profile-menu">
     <div class="profile-menu-content">

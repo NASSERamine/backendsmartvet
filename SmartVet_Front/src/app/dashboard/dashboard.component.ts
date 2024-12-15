@@ -119,6 +119,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/add-animal']);
   }
 
+  navigateToProfil(){
+    this.router.navigate(['/profil']);
+  }
+
   isOpen = false;
 
   toggleSidebar() {

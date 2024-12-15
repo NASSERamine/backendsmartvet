@@ -7,6 +7,7 @@ import { AddAnimalComponent } from './add-animal/add-animal.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { AddMedicationComponent } from './add-medication/add-medication.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },  
   { path: 'stat', component: StatisticsComponent }, 
   { path: 'add-medication', component: AddMedicationComponent }, 
+  {path:'profil' ,component:ProfilComponent}
 ];
 
 

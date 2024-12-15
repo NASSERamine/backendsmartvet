@@ -6,6 +6,7 @@ import { HeartRateService } from '../services/heart-rate-service.service'; // Se
 import { LoginService } from '../services/LoginService';
 import { AddMedicationComponent } from '../add-medication/add-medication.component';
 import { MouvementService } from '../services/mouvement.service';
+import { AddDeleteComponent } from '../add-delete/add-delete.component';
 
 @Component({
   selector: 'app-dashboard',

@@ -14,12 +14,16 @@ const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' }, // Redirige vers la page d'accueil
   { path: 'welcome', component: WelcomePageComponent },    // Route pour la page d'accueil
   { path: 'login', component: LoginComponent },            // Route pour le login
-  { path: 'signup', component: SignUpComponent },          // Route pour l'inscription
-  { path: 'add-animal', component: AddAnimalComponent },   // Route pour ajouter un animal
+  { path: 'signup', component: SignUpComponent },          
+  { path: 'add-animal', component: AddAnimalComponent },   
   { path: 'dashboard', component: DashboardComponent },  
   { path: 'stat', component: StatisticsComponent }, 
   { path: 'add-medication', component: AddMedicationComponent }, 
-  {path:'profil' ,component:ProfilComponent}
+  {path:'profil' ,component:ProfilComponent
+
+
+
+  }
 ];
 
 

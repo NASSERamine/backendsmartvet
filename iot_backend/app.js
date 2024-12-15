@@ -6,6 +6,7 @@ const dataRoutes = require("./routes/dataRoutes");
 const authRoutes = require("./routes/authRoutes");
 const animalRoutes = require("./routes/animalRoutes");
 const chatbotRoutes = require("./routes/dialogflowRoutes");
+const medicationRoutes = require("./routes/medicationRoutes");
 const { syncDataToFirebase } = require("./controllers/dataController");
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use("/api", dataRoutes);
 app.use("/api", authRoutes);
 app.use("/api", animalRoutes);
+app.use("/api",medicationRoutes)
 app.use("/api/chatbot", chatbotRoutes);
 
 // Gestion des erreurs

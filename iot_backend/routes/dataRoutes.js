@@ -18,4 +18,5 @@ router.get("/movement", getMovement);
 router.get("/pulse", getPulseValue);
 router.get("/history", getSensorHistory);
 
+
 module.exports = router;

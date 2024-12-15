@@ -110,35 +110,20 @@
             <div class="medication-card">
               <div class="card-header">
                 <h3>Medications</h3>
-                <button class="add-button" (click)="addMedication.openModal()">+</button>
+                <button class="add-button" (click)="openAddMedicationModal(addMedication)">+</button>
               </div>
               <div class="card-content">
-                <div class="medication-item">
+                <div *ngFor="let medication of medications" class="medication-item">
                   <div>
-                    <p class="medication-name">Vitamin D</p>
-                    <p class="medication-detail">1 tablet every day</p>
-                  </div>
-                  <button class="options-button">⋮</button>
-                </div>
-                <div class="medication-item">
-                  <div>
-                    <p class="medication-name">Meloxicam</p>
-                    <p class="medication-detail">1 tablet every 3 days</p>
-                  </div>
-                  <button class="options-button">⋮</button>
-                </div>
-                <div class="medication-item">
-                  <div>
-                    <p class="medication-name">Atenolol</p>
-                    <p class="medication-detail">1 tablet per month</p>
+                    <p class="medication-name">{{ medication.name }}</p>
+                    <p class="medication-detail">{{ medication.details }}</p>
                   </div>
                   <button class="options-button">⋮</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          
       <app-add-medication #addMedication></app-add-medication>
 
       <div class="tab-pane fade" id="content-2">

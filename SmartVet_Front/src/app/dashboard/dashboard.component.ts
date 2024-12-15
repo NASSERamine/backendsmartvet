@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MedicationService } from '../services/medication.service'; // Importer MedicationService
 import { TemperatureService } from '../services/temperature.service'; // Service pour la température
 import { HeartRateService } from '../services/heart-rate-service.service'; // Service pour la fréquence cardiaque
 import { LoginService } from '../services/LoginService';
@@ -13,20 +14,22 @@ import { AddMedicationComponent } from '../add-medication/add-medication.compone
 export class DashboardComponent implements OnInit {
   temperature: string = ''; // Variable pour afficher la température
   heartRate: string = '';
-  userName: string='';
+  userName: string = '';
+  medications: any[] = []; // Liste des médicaments
 
   constructor(
     private router: Router,
     private temperatureService: TemperatureService, // Service pour la température
     private heartRateService: HeartRateService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private medicationService: MedicationService // Injecter MedicationService
   ) {}
 
   ngOnInit() {
     this.loadTemperature(); // Charger la température au démarrage
     this.loadHeartRate();
     this.loadUserName();
-    
+    this.loadMedications(); // Charger les médicaments au démarrage
   }
 
   // Récupération de la température
@@ -59,6 +62,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
   loadUserName() {
     const email = localStorage.getItem('email');  // Récupérer l'email du localStorage
     if (email) {
@@ -75,6 +79,19 @@ export class DashboardComponent implements OnInit {
       console.warn('Aucun email trouvé dans le localStorage.');
     }
   }
+
+  // Récupérer la liste des médicaments
+  loadMedications() {
+    this.medicationService.getAllMedications().subscribe(
+      (medications) => {
+        this.medications = medications; // Assurez-vous que la réponse est un tableau d'objets
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des médicaments', error);
+      }
+    );
+  }
+
   // Navigation vers la page d'ajout d'animal
   navigateToAdd() {
     this.router.navigate(['/add-animal']);
@@ -93,7 +110,7 @@ export class DashboardComponent implements OnInit {
   closeSidebar() {
     this.isOpen = false;
   }
-  
+
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }

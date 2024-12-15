@@ -14,7 +14,7 @@ export class MouvementService {
     this.startPolling();  // Lance le polling dès que le service est créé
   }
 
-  // Méthode pour récupérer la température depuis l'API
+  // Méthode pour récupérer la Movement depuis l'API
   getTemperature(): Observable<any> {
     return this.movmenteSubject.asObservable();  // Retourne un observable sur lequel les composants peuvent s'abonner
   }

@@ -5,6 +5,7 @@ import { TemperatureService } from '../services/temperature.service'; // Service
 import { HeartRateService } from '../services/heart-rate-service.service'; // Service pour la fréquence cardiaque
 import { LoginService } from '../services/LoginService';
 import { AddMedicationComponent } from '../add-medication/add-medication.component';
+import { MouvementService } from '../services/mouvement.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ import { AddMedicationComponent } from '../add-medication/add-medication.compone
 export class DashboardComponent implements OnInit {
   temperature: string = ''; // Variable pour afficher la température
   heartRate: string = '';
+  movement : string='';
   userName: string = '';
   medications: any[] = []; // Liste des médicaments
 
@@ -22,14 +24,16 @@ export class DashboardComponent implements OnInit {
     private temperatureService: TemperatureService, // Service pour la température
     private heartRateService: HeartRateService,
     private loginService: LoginService,
-    private medicationService: MedicationService // Injecter MedicationService
+    private medicationService: MedicationService,
+    private mouvementService: MouvementService // Injecter MedicationService
   ) {}
 
   ngOnInit() {
     this.loadTemperature(); // Charger la température au démarrage
     this.loadHeartRate();
     this.loadUserName();
-    this.loadMedications(); // Charger les médicaments au démarrage
+    this.loadMedications();
+    this.loadMovment(); // Charger les médicaments au démarrage
   }
 
   // Récupération de la température
@@ -59,6 +63,17 @@ export class DashboardComponent implements OnInit {
       (error: any) => {
         console.error('Erreur lors de la récupération de la fréquence cardiaque', error);
         this.heartRate = 'Erreur';
+      }
+    );
+  }
+  loadMovment() {
+    this.mouvementService.getTemperature().subscribe(
+      (data: { movement: number; timestamp: string }) => {
+        this.movement = `${data.movement} `; // Format de la fréquence cardiaque
+      },
+      (error: any) => {
+        console.error('Erreur lors de la récupération de la fréquence cardiaque', error);
+        this.movement = 'Erreur';
       }
     );
   }

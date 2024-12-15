@@ -34,4 +34,13 @@ export class TemperatureService {
       );
     }, 5000);  // Changez la valeur 5000 pour l'intervalle souhaité
   }
+
+  getTemperatureHistory(): Observable<{ temperature: number; timestamp: string }[]> {
+    return this.http.get<{ temperature: number; timestamp: string }[]>(
+      'http://localhost:5000/api/history'
+    );
+  }
+  
+  
+  
 }

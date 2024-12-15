@@ -4,6 +4,7 @@ const {
   getTemperature,
   getMovement,
   getPulseValue,
+  getSensorHistory
 } = require("../controllers/dataController");
 
 const router = express.Router();
@@ -15,5 +16,6 @@ router.get("/sync", syncDataToFirebase);
 router.get("/temperature", getTemperature);
 router.get("/movement", getMovement);
 router.get("/pulse", getPulseValue);
+router.get("/history", getSensorHistory);
 
 module.exports = router;

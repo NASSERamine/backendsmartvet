@@ -129,4 +129,9 @@ export class DashboardComponent implements OnInit {
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }
+
+  openAddDeleteModal(addDeleteComponent: AddDeleteComponent, action: string) {
+    addDeleteComponent.openModal(action); // Pass the action as an argument
+  }
+
 }

@@ -58,7 +58,20 @@ h3 {
 }
 
 .chart-container {
-  margin: 20px auto;
   width: 90%;
-  max-width: 800px;
+  max-width: 600px; /* Limite la largeur */
+  margin: 20px auto; /* Centre le graphique horizontalement */
+  height: 400px; /* Hauteur fixe pour le graphique */
+  background-color: #ffffff; /* Fond blanc */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  padding: 20px; /* Espace intérieur */
 }
+
+h3 {
+  text-align: center;
+  color: #333; /* Couleur du titre */
+  font-size: 20px;
+  margin-top: 10px;
+}
+

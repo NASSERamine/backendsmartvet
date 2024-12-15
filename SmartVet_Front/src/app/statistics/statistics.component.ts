@@ -92,8 +92,16 @@ export class StatisticsComponent implements OnInit {
         responsive: true,
         plugins: {
           legend: {
-            display: true,
+            display: false,
             position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Temperature Over Time', // Titre du graphique
+            font: {
+              size: 16, // Taille du titre
+              weight: 'bold',
+            },
           },
         },
         scales: {
@@ -134,8 +142,16 @@ export class StatisticsComponent implements OnInit {
       options: {
         responsive: true,
         plugins: {
-          legend: {
+          title: {
             display: true,
+            text: 'Heart Rate (BPM)', // Titre du graphique
+            font: {
+              size: 16, // Taille du titre
+              weight: 'bold',
+            },
+          },
+          legend: {
+            display: false,
             position: 'top',
           },
         },

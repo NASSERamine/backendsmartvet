@@ -4,7 +4,8 @@ const {
   getTemperature,
   getMovement,
   getPulseValue,
-  getSensorHistory
+  getSensorHistory,
+  getNotifications
 } = require("../controllers/dataController");
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.get("/temperature", getTemperature);
 router.get("/movement", getMovement);
 router.get("/pulse", getPulseValue);
 router.get("/history", getSensorHistory);
+router.get("/notifications", getNotifications);
 
 
 module.exports = router;

@@ -12,7 +12,7 @@
   }
   
   .sidebar-expanded .dashboard-content {
-    margin-left: 250px; /* Adjust this value to match your expanded sidebar width */
+    margin-left: 100px; /* Adjust this value to match your expanded sidebar width */
   }
   
  .logo{
@@ -31,11 +31,7 @@
     border-radius: 10px;
     width: 100px;
   }
-  .card {
-    border: none;
-    border-radius: 10px;
-   
-  }
+  
   
   .card h3 {
     font-size: 1.5rem;
@@ -68,10 +64,12 @@
     border-radius: 10px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: flex;
-    width: 250px;
+    width: 220px;
     height:210px;
     margin-bottom: 20px;
     background-color:  #f9f9ff;
+    border: none;
+    border-radius: 10px;
   }
 
   

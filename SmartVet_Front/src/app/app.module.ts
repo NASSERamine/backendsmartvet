@@ -18,6 +18,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { AddMedicationComponent } from './add-medication/add-medication.component';
 import { AddDeleteComponent } from './add-delete/add-delete.component';
 import { ProfilComponent } from './profil/profil.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProfilComponent } from './profil/profil.component';
     AddMedicationComponent,
     AddDeleteComponent,
     ProfilComponent,
+    NotificationComponent,
     
   
 

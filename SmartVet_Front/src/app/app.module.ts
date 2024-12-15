@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { AddMedicationComponent } from './add-medication/add-medication.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     LocationComponent,
     ChatBotComponent,
     StatisticsComponent,
+    AddMedicationComponent,
     
   
 

@@ -1,15 +1,19 @@
-<div class="sidebar">
-   <div class="sidebar-header">
-    <img src="assets/logo2.png" alt="Logo" class=" rounded-circle logo" />
+<button class="hamburger-menu" (click)="toggleSidebar()">
+  <i class="fas fa-bars hamburger-icon"></i>
+</button>
+
+<div class="sidebar" [class.open]="isOpen">
+  <button class="close-button" (click)="closeSidebar()" *ngIf="isOpen">
+    <i class="fas fa-times"></i>
+  </button>
+  <div class="sidebar-header">
+    <img src="assets/logo2.png" alt="Logo" class="rounded-circle logo" />
   </div>
 
-  
-    
   <ul class="menu">
     <h6>General</h6>
     <li class="menu-item active">
       <i class="fas fa-th-large"></i>
-     
       <span class="menu-text" routerLink="/dashboard" routerLinkActive="active">Dashboard</span>
     </li>
     
@@ -35,3 +39,4 @@
     </li>
   </ul>
 </div>
+

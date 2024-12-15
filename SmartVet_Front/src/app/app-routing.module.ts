@@ -6,6 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AddAnimalComponent } from './add-animal/add-animal.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { AddMedicationComponent } from './add-medication/add-medication.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },          // Route pour l'inscription
   { path: 'add-animal', component: AddAnimalComponent },   // Route pour ajouter un animal
   { path: 'dashboard', component: DashboardComponent },  
-  { path: 'stat', component: StatisticsComponent },  // Route pour le tableau de bord
+  { path: 'stat', component: StatisticsComponent }, 
+  { path: 'add-medication', component: AddMedicationComponent }, 
 ];
 
 

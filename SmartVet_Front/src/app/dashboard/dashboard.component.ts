@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TemperatureService } from '../services/temperature.service'; // Service pour la température
 import { HeartRateService } from '../services/heart-rate-service.service'; // Service pour la fréquence cardiaque
 import { LoginService } from '../services/LoginService';
+import { AddMedicationComponent } from '../add-medication/add-medication.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -78,5 +79,22 @@ export class DashboardComponent implements OnInit {
   navigateToAdd() {
     this.router.navigate(['/add-animal']);
   }
+
+  isOpen = false;
+
+  toggleSidebar() {
+    this.isOpen = !this.isOpen;
+    const dashboardContainer = document.querySelector('.dashboard-container');
+    if (dashboardContainer) {
+      dashboardContainer.classList.toggle('sidebar-expanded');
+    }
+  }
+
+  closeSidebar() {
+    this.isOpen = false;
+  }
   
+  openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
+    addMedicationComponent.openModal();
+  }
 }

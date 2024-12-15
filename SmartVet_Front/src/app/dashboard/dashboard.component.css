@@ -1,7 +1,18 @@
-.dashboard-container {
+
+  .dashboard-container {
     display: flex;
     min-height: 100vh;
     background-color: #f9f9ff;
+  }
+  
+  .dashboard-content {
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .sidebar-expanded .dashboard-content {
+    margin-left: 250px; /* Adjust this value to match your expanded sidebar width */
   }
   
  .logo{
@@ -9,10 +20,7 @@
   height: 100px;
  }
   
-  .dashboard-content {
-    flex: 1; /* Occupy remaining space */
-    padding: 20px;
-  }
+  
   
   .dashboard-header {
     margin-bottom: 20px;

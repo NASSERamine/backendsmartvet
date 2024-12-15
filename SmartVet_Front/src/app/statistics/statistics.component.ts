@@ -11,39 +11,91 @@ import { ChartType } from 'angular-google-charts';
 })
 export class StatisticsComponent implements OnInit {
   userName: string = '';
-  heartRateData: any[] = [['Time', 'Heart Rate']]; // Initial data for the chart
-  chartOptions = {
-    title: 'Heart Rate Over Time',
-    curveType: 'function',
-    legend: { position: 'bottom' },
+
+  // Heart rate data and chart options
+  heartRateData: any[] = [
+    [12, 75],
+    [13, 80],
+    [14, 77],
+    [15, 85],
+    [16, 78]
+  ];
+  chartOptionsHeartRate = {
+    title: 'Heart Rate',
+    legend: 'none',
+    backgroundColor: 'transparent',
     hAxis: {
-      title: 'Time',
-      format: 'HH:mm:ss',  // Time formatting for better readability
+      textStyle: { color: '#999' },
+      gridlines: { color: 'transparent' }
     },
     vAxis: {
-      title: 'Heart Rate (BPM)',
+      textStyle: { color: '#999' },
+      gridlines: { count: 4, color: '#eee' },
+      minValue: 60,
+      maxValue: 120
+    },
+    colors: ['#00C6FB'],
+    chartArea: {
+      left: 50,
+      top: 20,
+      width: '85%',
+      height: '70%'
     }
   };
-  chartType: ChartType = ChartType.LineChart; // Chart type set to LineChart
+
+  // Temperature data and chart options
+  temperatureData: any[] = [
+    ['12 PM', 36.5],
+    ['1 PM', 36.7],
+    ['2 PM', 36.6],
+    ['3 PM', 36.8],
+    ['4 PM', 36.9]
+  ];
+  chartOptionsTemperature = {
+    title: 'Temperature (°C)',
+    legend: { position: 'bottom' },
+    backgroundColor: 'transparent',
+    hAxis: {
+      textStyle: { color: '#999' },
+      gridlines: { color: 'transparent' }
+    },
+    vAxis: {
+      textStyle: { color: '#999' },
+      gridlines: { count: 4, color: '#eee' },
+      minValue: 35,
+      maxValue: 40
+    },
+    colors: ['#FF5733'], // Orange for temperature line
+    chartArea: {
+      left: 50,
+      top: 20,
+      width: '85%',
+      height: '70%'
+    }
+  };
+
+  averageHeartRate: number = 92;
+
+  chartTypeHeartRate: ChartType = ChartType.ColumnChart; // Heart rate chart
+  chartTypeTemperature: ChartType = ChartType.LineChart; // Temperature chart
 
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private heartRateService: HeartRateService // Inject the heart rate service
+    private heartRateService: HeartRateService
   ) {}
 
   ngOnInit() {
     this.loadUserName();
-    this.listenForHeartRateData();  // Listen for updates from the heart rate service
+    this.listenForHeartRateData();
   }
 
-  // Load user name from the localStorage using the email
   loadUserName() {
-    const email = localStorage.getItem('email');  // Retrieve email from localStorage
+    const email = localStorage.getItem('email');
     if (email) {
       this.loginService.getNameByEmail(email).subscribe(
         (user) => {
-          this.userName = user.name;  // Ensure the response contains a 'name' field
+          this.userName = user.name;
           console.log('User name retrieved:', this.userName);
         },
         (error) => {
@@ -55,15 +107,15 @@ export class StatisticsComponent implements OnInit {
     }
   }
 
-  // Listen for updates from the heart rate service
   listenForHeartRateData() {
     this.heartRateService.getHeartRate().subscribe((data) => {
-      const newData = [new Date(data.timestamp).toLocaleTimeString(), data.heartRate]; 
-      console.log('New heart rate data:', newData);// Format timestamp
-      this.heartRateData.push(newData);  // Add new data to the chart
+      const newHeartRateData = [new Date(data.timestamp).toLocaleTimeString(), data.heartRate];
+      this.heartRateData.push(newHeartRateData);
       if (this.heartRateData.length > 20) {
-        this.heartRateData.shift();  // Keep the chart data to a manageable size (e.g., 20 entries)
+        this.heartRateData.shift();
       }
+
+      
     });
   }
 }

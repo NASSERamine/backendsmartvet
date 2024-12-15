@@ -21,14 +21,25 @@
       </div>
     </div>
 
-    <div class="heart-rate-chart">
-      <google-chart
-        [type]="chartType"
-        [data]="heartRateData"
-        [options]="chartOptions"
-        [width]="100"
-        [height]="400"
-      ></google-chart>
+    <div >
+      <!-- Heart Rate Chart -->
+      <div class="heart-rate-chart">
+        <google-chart
+          [type]="chartTypeHeartRate"
+          [data]="heartRateData"
+          [options]="chartOptionsHeartRate">
+        </google-chart>
+      </div>
+    
+      <!-- Temperature Chart -->
+      <div class="temperature-chart">
+        <google-chart
+          [type]="chartTypeTemperature"
+          [data]="temperatureData"
+          [options]="chartOptionsTemperature">
+        </google-chart>
+      </div>
     </div>
+    
   </div>
 </div>

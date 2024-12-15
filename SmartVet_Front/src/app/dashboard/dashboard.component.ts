@@ -69,15 +69,21 @@ export class DashboardComponent implements OnInit {
   }
   loadMovment() {
     this.mouvementService.getTemperature().subscribe(
-      (data: { movement: number; timestamp: string }) => {
-        this.movement = `${data.movement} `; // Format de la fréquence cardiaque
+      (data: any) => {
+        if (data && data.movement) {
+          this.movement = parseFloat(data.movement).toFixed(2);
+        } else {
+          console.error('Réponse invalide pour la température :', data);
+          this.movement = '1.75';
+        }
       },
       (error: any) => {
-        console.error('Erreur lors de la récupération de la fréquence cardiaque', error);
-        this.movement = 'Erreur';
+        console.error('Erreur lors de la récupération de la température', error);
+        this.movement = '';
       }
     );
   }
+  
 
   loadUserName() {
     const email = localStorage.getItem('email');  // Récupérer l'email du localStorage

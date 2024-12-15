@@ -1,0 +1,21 @@
+<!-- Trigger Buttons -->
+<button class="btn btn-danger" (click)="openModal('delete')">Delete</button>
+<button class="btn btn-primary" (click)="openModal('add')">Update</button>
+
+<!-- Modal Structure -->
+<div class="modal" [ngClass]="{'show': isModalOpen}" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between">
+          <!-- Conditionally show action buttons based on actionType -->
+          <button *ngIf="actionType === 'delete'" class="btn btn-danger" (click)="deleteAction()">Delete</button>
+          <button *ngIf="actionType === 'add'" class="btn btn-primary" (click)="addAction()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

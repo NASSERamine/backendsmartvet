@@ -16,6 +16,7 @@ import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { AddMedicationComponent } from './add-medication/add-medication.component';
+import { AddDeleteComponent } from './add-delete/add-delete.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddMedicationComponent } from './add-medication/add-medication.componen
     ChatBotComponent,
     StatisticsComponent,
     AddMedicationComponent,
+    AddDeleteComponent,
     
   
 

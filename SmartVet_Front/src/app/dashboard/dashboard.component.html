@@ -123,7 +123,7 @@
                     <p class="medication-name">{{ medication.name }}</p>
                     <p class="medication-detail">{{ medication.details }}</p>
                   </div>
-                  <button class="options-button">⋮</button>
+                  <button class="options-button" (click)="openAddDeleteModal(addDelete, 'delete')">⋮</button>
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@
          
         </div>
        
-         
+      <app-add-delete #addDelete></app-add-delete>
       <app-add-medication #addMedication></app-add-medication>
 
       <div class="tab-pane fade" id="content-2">

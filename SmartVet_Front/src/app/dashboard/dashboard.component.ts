@@ -5,6 +5,7 @@ import { TemperatureService } from '../services/temperature.service'; // Service
 import { HeartRateService } from '../services/heart-rate-service.service'; // Service pour la fréquence cardiaque
 import { LoginService } from '../services/LoginService';
 import { AddMedicationComponent } from '../add-medication/add-medication.component';
+import { AddDeleteComponent } from '../add-delete/add-delete.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -114,4 +115,9 @@ export class DashboardComponent implements OnInit {
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }
+
+  openAddDeleteModal(addDeleteComponent: AddDeleteComponent, action: string) {
+    addDeleteComponent.openModal(action); // Pass the action as an argument
+  }
+
 }

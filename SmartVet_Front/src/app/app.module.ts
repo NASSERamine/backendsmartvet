@@ -17,6 +17,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { AddMedicationComponent } from './add-medication/add-medication.component';
 import { AddDeleteComponent } from './add-delete/add-delete.component';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddDeleteComponent } from './add-delete/add-delete.component';
     StatisticsComponent,
     AddMedicationComponent,
     AddDeleteComponent,
+    ProfilComponent,
     
   
 

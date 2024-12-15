@@ -57,7 +57,7 @@ const login = async (req, res) => {
 };
 
 const NameByEmail = async (req, res) => {
-  const { email } = req.params.email;
+  const { email } = req.params;
 
   if (!email) {
     return res.status(400).json({ message: "L'email est requis." });

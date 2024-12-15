@@ -8,15 +8,50 @@
           <p class="text-muted">Good Morning,</p>
           <h2>{{ userName }}</h2>
         </div>
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center position-relative">
           <i class="fas fa-bell text-muted fs-4 me-3"></i>
           <img
             src="assets/profil.png"
-            alt="Profile" 
+            alt="Profile"
             width="50"
             height="50"
-            (click)="navigateToProfil()"/>
+            (click)="toggleProfilePopup()"
+            class="cursor-pointer"
+          />
+        
+          <!-- Profile Popup -->
+          <div
+            *ngIf="isProfilePopupVisible"
+            class="profile-popup shadow rounded"
+            (click)="$event.stopPropagation()"
+          >
+            <div class="profile-popup-header text-center">
+              <img
+                src="assets/profil.png"
+                alt="Profile"
+                width="80"
+                height="80"
+                class="mb-2 rounded-circle"
+              />
+              <h5 class="mb-1">{{ userName }}</h5>
+              <p class="text-muted">View Profile</p>
+            </div>
+            <div class="profile-popup-body">
+              <ul class="list-unstyled mb-0">
+                <li class="py-2 border-bottom">
+                  <a href="#">My Profile</a>
+                </li>
+                <li class="py-2 border-bottom">
+                  <a href="#">Settings</a>
+                </li>
+                <li class="py-2">
+                  <a href="#" (click)="logout()">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+        
       </div>
     </div>
 

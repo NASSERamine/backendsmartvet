@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   movement : string='';
   userName: string = '';
   medications: any[] = []; // Liste des médicaments
+  isProfilePopupVisible: boolean = false;
 
   constructor(
     private router: Router,
@@ -119,8 +120,14 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/add-animal']);
   }
 
-  navigateToProfil(){
-    this.router.navigate(['/profil']);
+  toggleProfilePopup() {
+    this.isProfilePopupVisible = !this.isProfilePopupVisible;
+  }
+
+  // Logout function
+  logout() {
+    localStorage.removeItem('email');
+    this.router.navigate(['/login']);
   }
 
   isOpen = false;

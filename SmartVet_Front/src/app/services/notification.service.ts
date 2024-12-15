@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private apiUrl = 'http://localhost:3000/notifications'; // Remplacez par votre URL de backend
+  private apiUrl = 'http://localhost:5000/api/notifications'; // Remplacez par votre URL de backend
 
   constructor(private http: HttpClient) {}
 

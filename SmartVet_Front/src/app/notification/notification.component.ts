@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -6,20 +7,22 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  @Input() message: string = ''; // The message to display in the notification
-  @Input() duration: number = 3000; // Duration to show the notification in milliseconds
-  isVisible: boolean = false;
+  notifications: any[] = [];
 
-  ngOnInit() {
-    this.showNotification();
+  constructor(private notificationService: NotificationService) {}
+
+  ngOnInit(): void {
+    this.loadNotifications();
   }
 
-  showNotification() {
-    this.isVisible = true;
-
-    // Automatically hide the notification after the specified duration
-    setTimeout(() => {
-      this.isVisible = false;
-    }, this.duration);
+  loadNotifications(): void {
+    this.notificationService.getNotifications().subscribe(
+      (data) => {
+        this.notifications = data;
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des notifications :', error);
+      }
+    );
   }
 }

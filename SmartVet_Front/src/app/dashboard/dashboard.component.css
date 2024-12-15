@@ -65,10 +65,11 @@
   }
   
   .card {
-    border-radius: 30px; 
+    border-radius: 10px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: flex;
-    width: 200px;
+    width: 250px;
+    height:210px;
     margin-bottom: 20px;
     background-color:  #f9f9ff;
   }
@@ -103,7 +104,7 @@
   .card2 h1 {
     font-size: 24px;
     color: #f9f9ff;
-    margin-left: 10px;
+    margin-left: 30px;
     margin-top: 10px;
   }
 
@@ -113,16 +114,36 @@
     margin-left: 10px;
    
   }
-
-  .card2{
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
+  .row {
     display: flex;
-    width: 200px;
-    height: 110px;
-    margin-bottom: 20px;
-    background-color:#4ea6cc;
+    flex-wrap: wrap;
+    gap: 20px; /* Smaller gap between cards */
+    margin: 0; /* Remove default margin */
   }
+  
+.col-lg-2,
+.col-md-6 {
+  padding: 5px; /* Reduce padding on grid columns */
+}
+
+.card, .card2 {
+  margin: 0; /* Remove individual card margins */
+}
+  .card2 {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    width: 220px; /* Fixed width */
+    height: 170px; /* Fixed height */
+    background-color: #f9f9ff; /* Light background color */
+    margin: 0 auto; /* Center the card horizontally if in a flex/grid layout */
+    padding: 10px; /* Add padding for spacing */
+    text-align: center; /* Align text elements */
+}
+
 
   .card3{
     border: 1px solid #f9f9ff;
@@ -130,6 +151,7 @@
     border-radius: 30px;
     display: flex;
     width: 300px;
+    height: 240px;
     background-color: #f9f9ff;
     margin-right: 10px;
   }
@@ -175,10 +197,10 @@
     background-color: #f9f9ff;
     border-radius: 20px;
     padding: 20px;
-    width: 300px;
+    width: 250px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
-    margin-left: 40px;
+ 
    
   }
 
@@ -267,3 +289,73 @@
     background-color: #3992b1;
   }
   
+  /* Responsive adjustments for small screens */
+@media (max-width: 991px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .col-lg-2, 
+  .col-md-6 {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+  }
+
+  .card, 
+  .card1, 
+  .card2, 
+  .card3, 
+  .card4,
+  .medication-card {
+    width: 100%;
+    max-width: 350px;
+    margin: 10px 0;
+  }
+
+  .dashboard-content {
+    padding: 10px;
+  }
+
+  .medication-card {
+    margin-bottom: 20px;
+  }
+
+  .row > div {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  /* Ensure location and chat bot components stack nicely */
+  .row .col-lg-6,
+  .row .col-lg-3 {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+  }
+
+  /* Adjust navigation tabs to be more mobile-friendly */
+  .nav-tabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-tabs .nav-item {
+    margin-bottom: 10px;
+  }
+
+  .nav-tabs .nav-link {
+    text-align: center;
+  }
+
+  .d-flex.justify-content-between.align-items-center.mb-3 {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .add-animal-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+}

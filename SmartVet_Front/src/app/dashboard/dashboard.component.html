@@ -51,57 +51,67 @@
     <div class="tab-content mt-4">
       <div class="tab-pane fade show active" id="content-1">
         <div class="row">
-         
-          <div class="col-lg-2 col-md-6 mb-4">
-            <div>
+          
+          <div class="col-lg-2 col-md-6 mb-2 ">
+            <div class="card align-items-center">
               <img
-                src="assets/avatar.png"
+                src="assets/Dog.png"
                 alt="Animal Avatar"
                 class="mb-2"
-                width="80"
-                height="80"
+                width="100"
+                height="100"
+  
               />
               <h5 class="fw-bold mb-1" id="name">Marlie</h5>
               <p class="text-muted mb-0" id="age">1 year old</p>
-            </div>
-            <div class="card2 p-3">
-              <div class="d-flex justify-content-between align-items-center">
-                <img
-                  src="assets/termo.png"
-                  alt="Temperature"
-                  class="rounded-circle mb-2"
-                  width="85"
-                />
-                <div>
-                  <h5 class="fw-bold mb-1">Temperature</h5>
-                  <h1 class="fw-bold mb-1" id="temp">{{ temperature }}</h1>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 mb-4">
-              <app-location></app-location>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-              <app-chat-bot></app-chat-bot>
+              <button class="btn add-animal-button ms-3 fw-bold">update</button>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card3 p-3">
-              <div>
-                <h5 class="fw-bold mb-1">Heart Rate</h5>
-                <div class="d-flex align-items-center">
-                  <h1 class="fw-bold mb-1" id="heartRate">{{ heartRate }}</h1>
-                  <h4 class="mb-1">bpm</h4>
+          <div class="col-lg-2 col-md-6 mb-2 mt-4">
+            <div class="card2 p-3">
+              <div class="text-center" style="background-color: #f8f9fa; border-radius: 12px;">
+                <img src="assets/temp.png" alt="Temperature Icon" class="mb-2" width="80" height="80" />
+                <h5  class="fw-normal mb-1" style="color: #6c757d;">Temperature</h5>
+                <div class="d-flex justify-content-center align-items-center">
+                  <h1 class="fw-bold mb-0" id="heartRate" style="color: #042e52; font-size: 2.5rem;">{{ temperature }}</h1>
+                 
                 </div>
               </div>
             </div>
             
+        </div>
+          <div class="col-lg-2 col-md-6 mb-2 mt-4">
+            <div class="card2 p-3 text-center" style="background-color: #f8f9fa; border-radius: 12px;">
+              <div>
+                <img src="assets/HeartRate.png" alt="Heart Icon" class="mb-2" width="80" height="80" />
+                <h6 class="fw-normal mb-1" style="color: #6c757d;">Heart Rate</h6>
+                <div class="d-flex justify-content-center align-items-center">
+                  <h1 class="fw-bold mb-0" id="heartRate" style="color: #042e52; font-size: 2.5rem;">{{ heartRate }}</h1>
+                  <span class="ms-1" style="color: #6c757d; font-size: 1.25rem;">bpm</span>
+                </div>
+              </div>
+            </div>  
           </div>
-
-          <!-- Third Column -->
-          <div class="col-lg-4 col-md-6 mb-4">
+          <div class="col-lg-2 col-md-6 mb-2 mt-4">
+            <div class="card2 p-3 text-center" style="background-color: #f8f9fa; border-radius: 12px;">
+              <div>
+                <img src="assets/footprint.png" alt="Heart Icon" class="mb-2" width="80" height="80" />
+                <h6 class="fw-normal mb-1" style="color: #6c757d;">Mouvement</h6>
+                <div class="d-flex justify-content-center align-items-center">
+                  <h1 class="fw-bold mb-0" id="heartRate" style="color: #042e52; font-size: 2.5rem;">{{ heartRate }}</h1>
+                  <span class="ms-1" style="color: #6c757d; font-size: 1.25rem;">bpm</span>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+       
+        
+               
+        
+        <div class="row">
+          <!-- Medication Card -->
+          <div class="col-lg-2 col-md-6 mb-4">
             <div class="medication-card">
               <div class="card-header">
                 <h3>Medications</h3>
@@ -118,7 +128,20 @@
               </div>
             </div>
           </div>
+        
+          <!-- Location Component -->
+          <div class="col-lg-6 ol-md-6 mb-4 ms-2">
+            <app-location></app-location>
+          </div>
+        
+          <div class="col-lg-3 col-md-6 mb-4">
+            <app-chat-bot></app-chat-bot>
+          </div> 
           
+         
+        </div>
+       
+         
       <app-add-medication #addMedication></app-add-medication>
 
       <div class="tab-pane fade" id="content-2">

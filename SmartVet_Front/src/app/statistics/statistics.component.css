@@ -1,7 +1,6 @@
 .stat-container {
   display: flex;
-  min-height: 100vh;
-  background-color: #f9f9ff;
+  
 }
 
 .stat-content {
@@ -15,6 +14,7 @@
   width: 100%;
   margin-bottom: 20px;
 }
+
 .dashboard-content {
   flex: 1;
   padding: 20px;
@@ -22,21 +22,29 @@
 }
 
 .charts-wrapper {
-  display: flex;
-  justify-content: space-around; 
-  align-items: center; 
-  gap: 10px; 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive two-column layout */
+  gap: 20px; /* Space between the charts */
+  margin-bottom: 20px; /* Space between rows of charts */
 }
+
+
+
 .chart-container {
-  width: 90%;
-  max-width: 600px; 
-  margin: 10px auto; 
-  height: 300px; 
-  background-color: #ffffff; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-  padding: 20px; 
+  width: 100%;
+  height: 250px; /* Slightly reduced height for smaller screens */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px; /* Reduced padding for smaller containers */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
+@media (max-width: 576px) {
+  .chart-container {
+    height: 200px; /* Adjust height further for very small screens */
+    padding: 10px; /* Reduced padding for mobile devices */
+  }
+}

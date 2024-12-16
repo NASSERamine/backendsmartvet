@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   userName: string = '';
   medications: any[] = []; // Liste des médicaments
   isProfilePopupVisible: boolean = false;
+  iconColor = 'text-muted';
 
   constructor(
     private router: Router,
@@ -150,6 +151,10 @@ export class DashboardComponent implements OnInit {
 
   openAddDeleteModal(addDeleteComponent: AddDeleteComponent, action: string) {
     addDeleteComponent.openModal(action); // Pass the action as an argument
+  }
+
+  updateIconColor(newColor: string): void {
+    this.iconColor = newColor; // Update the icon color
   }
 
 }

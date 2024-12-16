@@ -21,12 +21,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },  
   { path: 'stat', component: StatisticsComponent }, 
   { path: 'add-medication', component: AddMedicationComponent }, 
-  {path:'profil' ,component:ProfilComponent
-
-
-
-  },
-  {path:'notifications ',component:NotificationComponent}
+  {path:'profil' ,component:ProfilComponent},
+  {path:'notification',component:NotificationComponent}
   
 ];
 

@@ -1,10 +1,38 @@
-<div class="notifications">
-  <h2>Notifications</h2>
-  <ul>
-    <li *ngFor="let notification of notifications">
-      <strong>{{ notification.message }}</strong>
-      <p>Horodatage : {{ notification.timestamp | date: 'short' }}</p>
-      <pre>{{ notification.sensorData | json }}</pre>
-    </li>
-  </ul>
-</div>
+
+
+<div class="stat-container">
+  <app-side-bar></app-side-bar>
+
+  <div class="dashboard-content">
+    <div class="dashboard-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p class="text-muted">Good Morning,</p>
+          <h2>ouma</h2>
+        </div>
+        <div class="d-flex align-items-center">
+          <i class="fas fa-bell text-muted fs-4 me-3"></i>
+          <img
+            src="assets/profil.png"
+            alt="Profile"
+            class="rounded-circle"
+            width="50"
+            height="50"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="notifications mt-3">
+      <h5>Notifications</h5>
+      <ul class="list-unstyled mb-0">
+        <li *ngFor="let notification of notifications" class="border-bottom py-2">
+          <strong>{{ notification.message }}</strong>
+          <p class="text-muted mb-0">{{ notification.timestamp | date: 'short' }}</p>
+        </li>
+      </ul>
+    </div>
+    
+    </div>
+  </div>
+

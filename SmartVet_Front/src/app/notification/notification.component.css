@@ -1,41 +1,105 @@
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    animation: fadeIn 0.3s ease-out, fadeOut 0.5s ease-in forwards;
+
+
+.notifications {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notifications h5 {
+  font-size: 1.5rem;
+}
+
+.notifications ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 500px; /* Set a max height for the notifications list */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.notifications li {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+}
+
+.profile-popup {
+  top: 50px;
+  right: 10px;
+  width: 200px;
+  max-width: 90vw;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-popup-header img {
+  width: 60px;
+  height: 60px;
+}
+
+.profile-popup-header h5 {
+  font-size: 1rem;
+}
+
+.profile-popup-body li a {
+  font-size: 0.9rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .notifications {
+    margin-top: 0;
+    max-height: 500px;
+    overflow-y: auto;
   }
   
-  .notification p {
-    margin: 0;
-    font-size: 1rem;
+  .profile-popup {
+    top: 50px;
+    right: 10px;
+    width: 180px;
+    max-width: 90vw;
   }
-  
-  /* Fade-in animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+}
+
+@media (max-width: 480px) {
+  .profile-popup {
+    width: 160px;
   }
-  
-  /* Fade-out animation */
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(100%);
-    }
+
+  .profile-popup-header img {
+    width: 50px;
+    height: 50px;
   }
-  
+
+  .profile-popup-header h5 {
+    font-size: 0.9rem;
+  }
+
+  .profile-popup-body li a {
+    font-size: 0.8rem;
+  }
+}
+
+.stat-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9f9ff;
+}
+.dashboard-header {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}

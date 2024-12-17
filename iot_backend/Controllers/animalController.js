@@ -1,122 +1,80 @@
-const {
-  addAnimal,
-  getAnimalById,
-  getAllAnimals,
-  updateAnimal,
-  deleteAnimal,
+const { 
+  addAnimal, 
+  getAnimalById, 
+  updateAnimal, 
+  deleteAnimal, 
+  getAnimalsByEmail 
 } = require("../services/animalService");
 
-// Ajouter un animal (Create)
+// Ajouter un animal
 const createAnimal = async (req, res) => {
-  const { name, age, type, weight } = req.body;
-
-  // Vérifier que les informations nécessaires sont présentes
-  if (!name || !age || !type || weight === undefined) {
-    return res.status(400).json({
-      message: "L'animal doit avoir un nom, un âge, un type et un poids.",
-    });
-  }
+  const { name, age, type, weight, email } = req.body;
 
   try {
-    const result = await addAnimal(name, age, type, weight);
-    res.status(201).json({
-      message: "Animal ajouté avec succès.",
-      data: result.data, // Inclure les données de l'animal (y compris l'ID généré)
-    });
+    const result = await addAnimal(name, age, type, weight, email);
+    res.status(201).json(result);
   } catch (error) {
-    console.error("Erreur lors de l'ajout de l'animal:", error.message);
-    res.status(500).json({
-      message: "Erreur serveur lors de l'ajout de l'animal.",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Erreur lors de l'ajout de l'animal", error: error.message });
   }
 };
 
-// Autres fonctions (inchangées)
-const getAllAnimalsHandler = async (req, res) => {
-  try {
-    const animals = await getAllAnimals();
-    res.status(200).json(animals);
-  } catch (error) {
-    console.error("Erreur lors de la récupération des animaux:", error.message);
-    res.status(500).json({
-      message: "Erreur serveur lors de la récupération des animaux.",
-      error: error.message,
-    });
-  }
-};
-
+// Récupérer un animal par ID
 const getAnimal = async (req, res) => {
-  const { animalId } = req.params;
+  const animalId = req.params.animalId;
 
   try {
     const animal = await getAnimalById(animalId);
-    if (!animal) {
-      return res.status(404).json({ message: "Animal non trouvé." });
-    }
     res.status(200).json(animal);
   } catch (error) {
-    console.error("Erreur lors de la récupération de l'animal:", error.message);
-    res.status(500).json({
-      message: "Erreur serveur lors de la récupération de l'animal.",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Erreur lors de la récupération de l'animal", error: error.message });
   }
 };
 
+// Mettre à jour un animal
 const updateAnimalInfo = async (req, res) => {
-  const { animalId } = req.params;
+  const animalId = req.params.animalId;
   const { name, age, type, weight } = req.body;
-
-  if (!name || !age || !type || weight === undefined) {
-    return res.status(400).json({
-      message:
-        "Le nom, l'âge, le type et le poids sont requis pour la mise à jour.",
-    });
-  }
 
   try {
     const result = await updateAnimal(animalId, name, age, type, weight);
-    if (!result) {
-      return res.status(404).json({ message: "Animal non trouvé." });
-    }
-    res.status(200).json({
-      message: "Animal mis à jour avec succès.",
-      data: result,
-    });
+    res.status(200).json(result);
   } catch (error) {
-    console.error("Erreur lors de la mise à jour de l'animal:", error.message);
-    res.status(500).json({
-      message: "Erreur serveur lors de la mise à jour de l'animal.",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Erreur lors de la mise à jour de l'animal", error: error.message });
   }
 };
 
+// Supprimer un animal
 const removeAnimal = async (req, res) => {
-  const { animalId } = req.params;
+  const animalId = req.params.animalId;
 
   try {
     const result = await deleteAnimal(animalId);
-    if (!result) {
-      return res.status(404).json({ message: "Animal non trouvé." });
-    }
-    res.status(200).json({
-      message: "Animal supprimé avec succès.",
-    });
+    res.status(200).json(result);
   } catch (error) {
-    console.error("Erreur lors de la suppression de l'animal:", error.message);
-    res.status(500).json({
-      message: "Erreur serveur lors de la suppression de l'animal.",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Erreur lors de la suppression de l'animal", error: error.message });
   }
 };
 
-module.exports = {
-  createAnimal,
-  getAllAnimalsHandler,
-  getAnimal,
-  updateAnimalInfo,
-  removeAnimal,
+// Récupérer les animaux par email
+const getAnimalsByUserEmail = async (req, res) => {
+  const email = req.query.email; // Email reçu en tant que paramètre de requête
+
+  if (!email) {
+    return res.status(400).json({ message: "L'email est requis" });
+  }
+
+  try {
+    const animals = await getAnimalsByEmail(email);
+    res.status(200).json(animals);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la récupération des animaux", error: error.message });
+  }
+};
+
+module.exports = { 
+  createAnimal, 
+  getAnimal, 
+  updateAnimalInfo, 
+  removeAnimal, 
+  getAnimalsByUserEmail 
 };

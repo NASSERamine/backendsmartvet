@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MedicationService } from '../services/medication.service'; // Importer MedicationService
-import { TemperatureService } from '../services/temperature.service'; // Service pour la température
-import { HeartRateService } from '../services/heart-rate-service.service'; // Service pour la fréquence cardiaque
+import { AnimalsService } from '../services/animals.service';
+import { TemperatureService } from '../services/temperature.service';
+import { HeartRateService } from '../services/heart-rate-service.service';
 import { LoginService } from '../services/LoginService';
-import { AddMedicationComponent } from '../add-medication/add-medication.component';
+import { MedicationService } from '../services/medication.service';
 import { MouvementService } from '../services/mouvement.service';
-import { AddDeleteComponent } from '../add-delete/add-delete.component';
+import { AddMedicationComponent } from '../add-medication/add-medication.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,113 +14,160 @@ import { AddDeleteComponent } from '../add-delete/add-delete.component';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  temperature: string = ''; // Variable pour afficher la température
-  heartRate: string = '';
-  movement : string='';
-  userName: string = '';
-  medications: any[] = []; // Liste des médicaments
+  temperature: string = ''; // Variable for temperature
+  heartRate: string = ''; // Variable for heart rate
+  movement: string = ''; // Variable for movement
+  userName: string = ''; // User name
+  medications: any[] = []; // List of medications
+  selectedAnimalName: string = ''; // Selected animal's name
   isProfilePopupVisible: boolean = false;
   iconColor = 'text-muted';
 
   constructor(
     private router: Router,
-    private temperatureService: TemperatureService, // Service pour la température
+    private animalsService: AnimalsService,
+    private temperatureService: TemperatureService,
     private heartRateService: HeartRateService,
     private loginService: LoginService,
     private medicationService: MedicationService,
-    private mouvementService: MouvementService // Injecter MedicationService
+    private mouvementService: MouvementService
   ) {}
 
   ngOnInit() {
-    this.loadTemperature(); // Charger la température au démarrage
+    this.loadTemperature();
     this.loadHeartRate();
     this.loadUserName();
     this.loadMedications();
-    this.loadMovment(); // Charger les médicaments au démarrage
+    this.loadMovement();
+    this.loadSelectedAnimalName();
   }
 
-  // Récupération de la température
+  // Load the selected animal name
+  loadSelectedAnimalName() {
+    const selectedAnimal = localStorage.getItem('selectedAnimal');
+    if (selectedAnimal) {
+      this.selectedAnimalName = selectedAnimal;
+    } else {
+      const emailKey = localStorage.getItem('email');
+      if (emailKey) {
+        this.animalsService.getAnimalsForLoggedInUser().subscribe(
+          (animals) => {
+            if (animals && animals.length > 0) {
+              this.selectedAnimalName = animals[0].name;
+              localStorage.setItem('selectedAnimal', this.selectedAnimalName); // Store the default selected animal
+            } else {
+              console.warn('Aucun animal trouvé pour cet utilisateur.');
+              this.selectedAnimalName = 'Nom indisponible';
+            }
+          },
+          (error) => {
+            console.error('Erreur lors de la récupération des animaux :', error);
+            this.selectedAnimalName = 'Erreur';
+          }
+        );
+      } else {
+        console.warn('Aucune clé email trouvée dans localStorage.');
+        this.selectedAnimalName = 'Non connecté';
+      }
+    }
+  }
+
+  // Method to handle the animal name click and refresh the data
+  onAnimalClick() {
+    // Reload the selected animal name and other data
+    this.loadSelectedAnimalName();
+    this.loadTemperature();
+    this.loadHeartRate();
+    this.loadMovement();
+    this.loadMedications();
+    console.log('Animal data refreshed');
+  }
+
+  // Load the temperature
   loadTemperature() {
     this.temperatureService.getTemperature().subscribe(
       (data: any) => {
         if (data && data.temperature) {
           this.temperature = parseFloat(data.temperature).toFixed(2) + '°C';
         } else {
-          console.error('Réponse invalide pour la température :', data);
+          console.error('Invalid response for temperature:', data);
           this.temperature = 'N/A';
         }
       },
       (error: any) => {
-        console.error('Erreur lors de la récupération de la température', error);
-        this.temperature = 'Erreur';
+        console.error('Error fetching temperature', error);
+        this.temperature = 'Error';
       }
     );
   }
 
-  // Récupération de la fréquence cardiaque
+  // Load the heart rate
   loadHeartRate() {
     this.heartRateService.getHeartRate().subscribe(
-      (data: { heartRate: number; timestamp: string }) => {
-        this.heartRate = `${data.heartRate} `; // Format de la fréquence cardiaque
+      (data: { heartRate: number }) => {
+        this.heartRate = `${data.heartRate}`;
       },
       (error: any) => {
-        console.error('Erreur lors de la récupération de la fréquence cardiaque', error);
-        this.heartRate = 'Erreur';
+        console.error('Error fetching heart rate', error);
+        this.heartRate = 'Error';
       }
     );
   }
-  loadMovment() {
+
+  // Load the movement data
+  loadMovement() {
     this.mouvementService.getTemperature().subscribe(
       (data: any) => {
         if (data && data.movement) {
           this.movement = parseFloat(data.movement).toFixed(2);
         } else {
-          console.error('Réponse invalide pour la température :', data);
+          console.error('Invalid response for movement:', data);
           this.movement = '1.75';
         }
       },
       (error: any) => {
-        console.error('Erreur lors de la récupération de la température', error);
+        console.error('Error fetching movement data', error);
         this.movement = '';
       }
     );
   }
-  
 
+  // Load the user name
   loadUserName() {
-    const email = localStorage.getItem('email');  // Récupérer l'email du localStorage
+    const email = localStorage.getItem('email');
     if (email) {
       this.loginService.getNameByEmail(email).subscribe(
         (user) => {
-          this.userName = user.name;  // Assurez-vous que la réponse contient un champ 'name'
-          console.log('Nom de l\'utilisateur récupéré :', this.userName);
+          this.userName = user.name;
+          console.log('User name fetched:', this.userName);
         },
         (error) => {
-          console.error('Erreur lors de la récupération du nom de l\'utilisateur:', error);
+          console.error('Error fetching user name:', error);
         }
       );
     } else {
-      console.warn('Aucun email trouvé dans le localStorage.');
+      console.warn('No email found in localStorage.');
     }
   }
 
-  // Récupérer la liste des médicaments
+  // Load medications
   loadMedications() {
     this.medicationService.getAllMedications().subscribe(
       (medications) => {
-        this.medications = medications; // Assurez-vous que la réponse est un tableau d'objets
+        this.medications = medications;
       },
       (error) => {
-        console.error('Erreur lors de la récupération des médicaments', error);
+        console.error('Error fetching medications', error);
       }
     );
   }
 
-  // Navigation vers la page d'ajout d'animal
+  // Navigate to add animal page
   navigateToAdd() {
     this.router.navigate(['/add-animal']);
   }
 
+  // Toggle profile popup
   toggleProfilePopup() {
     this.isProfilePopupVisible = !this.isProfilePopupVisible;
   }
@@ -131,8 +178,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  // Sidebar toggle
   isOpen = false;
-
   toggleSidebar() {
     this.isOpen = !this.isOpen;
     const dashboardContainer = document.querySelector('.dashboard-container');
@@ -148,13 +195,4 @@ export class DashboardComponent implements OnInit {
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }
-
-  openAddDeleteModal(addDeleteComponent: AddDeleteComponent, action: string) {
-    addDeleteComponent.openModal(action); // Pass the action as an argument
-  }
-
-  updateIconColor(newColor: string): void {
-    this.iconColor = newColor; // Update the icon color
-  }
-
 }

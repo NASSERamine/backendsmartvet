@@ -7,14 +7,24 @@ import { AddAnimalService } from '../services/add-animal.service';
   styleUrls: ['./add-animal.component.css'],
 })
 export class AddAnimalComponent {
-  animal = { name: '', type: '', age: 0, weight: 0 }; // Ajoutez le champ 'weight' (poids) si nécessaire
+  animal = { name: '', type: '', age: 0, weight: 0 }; // Animal object with fields name, type, age, and weight
   message = '';
 
   constructor(private addAnimalService: AddAnimalService) {}
 
   submitAnimal(): void {
-    // Soumettre les informations de l'animal via le service
-    this.addAnimalService.addAnimal(this.animal).subscribe(
+    const userEmail = localStorage.getItem('email'); // Récupérer l'email de l'utilisateur depuis le localStorage
+
+    if (!userEmail) {
+      console.error('Aucun email trouvé dans le localStorage');
+      this.message = 'L\'email de l\'utilisateur est requis.';
+      return;
+    }
+
+    const animalWithEmail = { ...this.animal, email: userEmail }; // Ajouter l'email à l'objet animal
+
+    // Soumettre les informations de l'animal avec l'email via le service
+    this.addAnimalService.addAnimal(animalWithEmail).subscribe(
       (response) => {
         this.message = 'Animal ajouté avec succès !';
         this.animal = { name: '', type: '', age: 0, weight: 0 }; // Réinitialiser le formulaire

@@ -1,7 +1,7 @@
 const { db } = require("../config/firebaseConfig"); // Importer la config Firebase
 
 // Fonction pour ajouter un animal
-const addAnimal = async (name, age, type, weight) => {
+const addAnimal = async (name, age, type, weight, email) => {
   try {
     const ref = db.ref("animals"); // Référence dans la base de données
     const newAnimalRef = ref.push(); // Générer un ID unique
@@ -13,6 +13,7 @@ const addAnimal = async (name, age, type, weight) => {
       age: age,
       type: type,
       weight: weight,
+      email: email, // Ajout de l'email de l'utilisateur
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -26,7 +27,7 @@ const addAnimal = async (name, age, type, weight) => {
   }
 };
 
-// Autres fonctions (inchangées)
+// Fonction pour récupérer un animal par ID
 const getAnimalById = async (animalId) => {
   try {
     const ref = db.ref("animals");
@@ -45,6 +46,7 @@ const getAnimalById = async (animalId) => {
   }
 };
 
+// Fonction pour mettre à jour un animal
 const updateAnimal = async (animalId, name, age, type, weight) => {
   try {
     const ref = db.ref("animals");
@@ -66,6 +68,7 @@ const updateAnimal = async (animalId, name, age, type, weight) => {
   }
 };
 
+// Fonction pour supprimer un animal
 const deleteAnimal = async (animalId) => {
   try {
     const ref = db.ref("animals");
@@ -81,4 +84,31 @@ const deleteAnimal = async (animalId) => {
   }
 };
 
-module.exports = { addAnimal, getAnimalById, updateAnimal, deleteAnimal };
+// Fonction pour récupérer les animaux par email
+const getAnimalsByEmail = async (email) => {
+  try {
+    const ref = db.ref("animals");
+    const snapshot = await ref.once("value");
+    const animals = snapshot.val();
+
+    if (!animals) {
+      return [];
+    }
+
+    // Filtrer les animaux par email
+    const filteredAnimals = Object.keys(animals)
+      .map((key) => ({
+        id: key,
+        ...animals[key],
+      }))
+      .filter((animal) => animal.email === email);
+
+    return filteredAnimals;
+  } catch (error) {
+    throw new Error(
+      "Erreur lors de la récupération des animaux par email : " + error.message
+    );
+  }
+};
+
+module.exports = { addAnimal, getAnimalById, updateAnimal, deleteAnimal, getAnimalsByEmail };

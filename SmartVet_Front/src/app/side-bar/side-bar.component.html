@@ -14,21 +14,42 @@
     <h6>General</h6>
     <li class="menu-item active">
       <i class="fas fa-th-large"></i>
-      <span class="menu-text" routerLink="/dashboard" routerLinkActive="active">Dashboard</span>
+      <span class="menu-text" routerLink="/dashboard" routerLinkActive="active">
+        Dashboard
+      </span>
     </li>
-    
+
     <li class="menu-item">
       <i class="fas fa-chart-bar"></i>
-      <span class="menu-text" routerLink="/stat" routerLinkActive="active">Statistics</span>
+      <span class="menu-text" routerLink="/stat" routerLinkActive="active">
+        Statistics
+      </span>
     </li>
     <li class="menu-item">
       <i class="fas fa-bell"></i>
-      <span class="menu-text" routerLink="/notification" routerLinkActive="active" >Notifications</span>
+      <span class="menu-text" routerLink="/notification" routerLinkActive="active">
+        Notifications
+      </span>
     </li>
-  
-    <br>
+
+    <!-- Animals Section -->
+    <h6>Animals</h6>
+    <li class="menu-item" (click)="toggleAnimalsList()">
+      <i class="fas fa-paw"></i>
+      <span class="menu-text">Animals</span>
+    </li>
+
+    <!-- Dynamically Generated Animal List -->
+    <ul class="sub-menu" *ngIf="isAnimalsListOpen">
+      <li class="sub-menu-item" *ngFor="let animal of animals">
+        <button class="btn btn-link animal-btn" (click)="onAnimalClick(animal)">
+          {{ animal.name }}
+        </button>
+      </li>
+    </ul>
+
+    <br />
     <h6>Tools</h6>
-    
     <li class="menu-item">
       <i class="fas fa-user"></i>
       <span class="menu-text">Profile</span>
@@ -37,6 +58,7 @@
       <i class="fas fa-cog"></i>
       <span class="menu-text">Log out</span>
     </li>
+
+    <br />
   </ul>
 </div>
-

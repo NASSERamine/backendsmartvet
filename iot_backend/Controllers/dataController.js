@@ -30,7 +30,7 @@ async function syncDataToFirebase(req, res) {
     const alerts = [];
     if (sensorData.temperature < THRESHOLDS.temperature.min || sensorData.temperature > THRESHOLDS.temperature.max) {
       alerts.push(`Température anormale: ${sensorData.temperature}°C`);
-    }
+       }
     if (sensorData.pulseValue < THRESHOLDS.pulse.min || sensorData.pulseValue > THRESHOLDS.pulse.max) {
       alerts.push(`Pouls anormal: ${sensorData.pulseValue}`);
     }

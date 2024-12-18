@@ -196,12 +196,33 @@
     background-color: #f9f9ff;
     border-radius: 20px;
     padding: 20px;
-    width: 250px;
+    width: 320px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
  
    
   }
+  
+  /* Ensures that the buttons are in a fixed position and on the same line */
+.action-buttons {
+  display: flex;
+  justify-content: end; /* Align buttons to the right */
+  align-items: center; /* Vertically center the icons */
+}
+
+.edit-icon {
+  color: #28a745; /* Green */
+}
+
+.delete-icon {
+  color: #DA498D; /* Pinkish Red */
+}
+
+/* Optional: Adds a little space between the icons */
+.action-buttons button {
+  margin-left: 10px;
+}
+
 
   .card-header {
     display: flex;
@@ -239,6 +260,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    max-height: 220px;
+    overflow-y: auto;
   }
 
   .medication-item {

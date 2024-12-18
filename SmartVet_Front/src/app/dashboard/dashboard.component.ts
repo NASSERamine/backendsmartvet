@@ -194,4 +194,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }
+  editMedication(medication: any): void {
+    // Logic to edit the selected medication
+    console.log('Editing medication:', medication);
+  }
+  
+  deleteMedication(medication: any): void {
+    // Logic to delete the selected medication
+    console.log('Deleting medication:', medication);
+  }
+  
 }

@@ -51,6 +51,7 @@
     *ngFor="let animal of animals">
     <button 
       class="btn btn-link animal-btn" 
+      [routerLink]="'/dashboard/' + animal.id"
       (click)="onAnimalClick(animal)">
       {{ animal.name }}
     </button>

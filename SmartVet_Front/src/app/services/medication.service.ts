@@ -19,4 +19,6 @@ export class MedicationService {
   getAllMedications(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+
+  
 }

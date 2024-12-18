@@ -94,6 +94,40 @@ h6 {
   font-size: 24px;
   color: #25265e;
 }
+/* Sub-menu Styling */
+ul.sub-menu {
+  list-style: none; /* Remove default bullets */
+  padding: 0; /* Remove padding */
+  margin: 0 0 0 20px; /* Indent the sub-menu */
+}
+
+.sub-menu-item {
+  padding: 8px 16px; /* Add padding for spacing */
+  color: #666; /* Set text color */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add smooth hover transition */
+}
+
+.sub-menu-item:hover {
+  background-color: #e9ecef; /* Light background on hover */
+  color: #007bff; /* Change text color on hover */
+}
+
+.sub-menu-item .animal-btn {
+  background: none; /* Remove button background */
+  border: none; /* Remove button border */
+  color: inherit; /* Inherit color from parent */
+  padding: 0; /* Remove extra padding */
+  font-size: 14px; /* Adjust font size */
+  text-align: left; /* Align text to the left */
+  cursor: pointer; /* Show pointer cursor */
+  text-decoration: none; 
+}
+
+.sub-menu-item .animal-btn:hover {
+  color: #0056b3; /* Darker hover text color */
+}
+
 
 .close-button {
   display: none;

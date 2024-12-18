@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'stat', component: StatisticsComponent }, 
   { path: 'add-medication', component: AddMedicationComponent }, 
   {path:'profil' ,component:ProfilComponent},
-  {path:'notification',component:NotificationComponent}
+  {path:'notification',component:NotificationComponent},
+  {path:'dashboard/:id',component:DashboardComponent}
   
 ];
 

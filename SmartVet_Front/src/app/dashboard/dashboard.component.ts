@@ -1,27 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimalsService } from '../services/animals.service';
+import { MedicationService } from '../services/medication.service';
 import { TemperatureService } from '../services/temperature.service';
 import { HeartRateService } from '../services/heart-rate-service.service';
 import { LoginService } from '../services/LoginService';
-import { MedicationService } from '../services/medication.service';
-import { MouvementService } from '../services/mouvement.service';
 import { AddMedicationComponent } from '../add-medication/add-medication.component';
+import { MouvementService } from '../services/mouvement.service';
+import { AnimalSelectionService } from '../services/animal-selection.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
-  temperature: string = ''; // Variable for temperature
-  heartRate: string = ''; // Variable for heart rate
-  movement: string = ''; // Variable for movement
-  userName: string = ''; // User name
-  medications: any[] = []; // List of medications
-  selectedAnimalName: string = ''; // Selected animal's name
+export class DashboardComponent implements OnInit, OnDestroy {
+  temperature: string = '';
+  heartRate: string = '';
+  movement: string = '';
+  userName: string = '';
+  medications: any[] = [];
+  selectedAnimalName: string = '';
   isProfilePopupVisible: boolean = false;
   iconColor = 'text-muted';
+
+  private animalSelectionSubscription: Subscription | null = null;
 
   constructor(
     private router: Router,
@@ -30,7 +34,8 @@ export class DashboardComponent implements OnInit {
     private heartRateService: HeartRateService,
     private loginService: LoginService,
     private medicationService: MedicationService,
-    private mouvementService: MouvementService
+    private mouvementService: MouvementService,
+    private animalSelectionService: AnimalSelectionService
   ) {}
 
   ngOnInit() {
@@ -39,48 +44,32 @@ export class DashboardComponent implements OnInit {
     this.loadUserName();
     this.loadMedications();
     this.loadMovement();
-    this.loadSelectedAnimalName();
+    this.loadAnimals();
+
+    // Subscribe to animal selection changes
+    this.animalSelectionSubscription = this.animalSelectionService.selectedAnimal$
+      .subscribe(animalName => {
+        if (animalName) {
+          this.selectedAnimalName = animalName;
+          // Reload animal-specific data
+          this.reloadAnimalSpecificData(animalName);
+        }
+      });
   }
 
-  // Load the selected animal name
-  loadSelectedAnimalName() {
-    const selectedAnimal = localStorage.getItem('selectedAnimal');
-    if (selectedAnimal) {
-      this.selectedAnimalName = selectedAnimal;
-    } else {
-      const emailKey = localStorage.getItem('email');
-      if (emailKey) {
-        this.animalsService.getAnimalsForLoggedInUser().subscribe(
-          (animals) => {
-            if (animals && animals.length > 0) {
-              this.selectedAnimalName = animals[0].name;
-              localStorage.setItem('selectedAnimal', this.selectedAnimalName); // Store the default selected animal
-            } else {
-              console.warn('Aucun animal trouvé pour cet utilisateur.');
-              this.selectedAnimalName = 'Nom indisponible';
-            }
-          },
-          (error) => {
-            console.error('Erreur lors de la récupération des animaux :', error);
-            this.selectedAnimalName = 'Erreur';
-          }
-        );
-      } else {
-        console.warn('Aucune clé email trouvée dans localStorage.');
-        this.selectedAnimalName = 'Non connecté';
-      }
+  ngOnDestroy() {
+    // Unsubscribe to prevent memory leaks
+    if (this.animalSelectionSubscription) {
+      this.animalSelectionSubscription.unsubscribe();
     }
   }
 
-  // Method to handle the animal name click and refresh the data
-  onAnimalClick() {
-    // Reload the selected animal name and other data
-    this.loadSelectedAnimalName();
+  // Reload data specific to the selected animal
+  reloadAnimalSpecificData(animalName: string) {
     this.loadTemperature();
     this.loadHeartRate();
-    this.loadMovement();
     this.loadMedications();
-    console.log('Animal data refreshed');
+    this.loadMovement();
   }
 
   // Load the temperature
@@ -162,6 +151,29 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  // Load animals
+  loadAnimals() {
+    this.animalsService.getAnimalsForLoggedInUser().subscribe(
+      (animals) => {
+        if (animals && animals.length > 0) {
+          const selectedAnimal = localStorage.getItem('selectedAnimal');
+          if (!selectedAnimal) {
+            // If no animal is selected, use the first animal in the list
+            const firstAnimal = animals[0];
+            this.animalSelectionService.setSelectedAnimal(firstAnimal.name);
+          } else {
+            this.animalSelectionService.setSelectedAnimal(selectedAnimal);
+          }
+        } else {
+          console.warn('No animals found for this user.');
+        }
+      },
+      (error) => {
+        console.error('Error fetching animals:', error);
+      }
+    );
+  }
+
   // Navigate to add animal page
   navigateToAdd() {
     this.router.navigate(['/add-animal']);
@@ -178,20 +190,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // Sidebar toggle
-  isOpen = false;
-  toggleSidebar() {
-    this.isOpen = !this.isOpen;
-    const dashboardContainer = document.querySelector('.dashboard-container');
-    if (dashboardContainer) {
-      dashboardContainer.classList.toggle('sidebar-expanded');
-    }
-  }
-
-  closeSidebar() {
-    this.isOpen = false;
-  }
-
+  // Open add medication modal
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }

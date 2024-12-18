@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimalsService } from '../services/animals.service';
+import { AnimalSelectionService } from '../services/animal-selection.service'; // Import du service
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,11 +15,20 @@ export class SideBarComponent implements OnInit {
   selectedAnimalName: string | null = null; // Selected animal name, nullable to handle no selection
   private selectedAnimalKey = 'selectedAnimal'; // Key for saving the animal name in localStorage
 
-  constructor(private animalsService: AnimalsService, private router: Router) {}
+  constructor(
+    private animalsService: AnimalsService,
+    private router: Router,
+    private animalSelectionService: AnimalSelectionService // Injection du service
+  ) {}
 
   ngOnInit(): void {
     this.fetchAnimals(); // Fetch animals when the component initializes
     this.loadSelectedAnimal(); // Load the selected animal from localStorage
+
+    // Abonnez-vous aux changements de l'animal sélectionné pour mettre à jour l'interface
+    this.animalSelectionService.selectedAnimal$.subscribe((animalName) => {
+      this.selectedAnimalName = animalName;
+    });
   }
 
   // Toggle sidebar open/close
@@ -51,16 +61,14 @@ export class SideBarComponent implements OnInit {
   // Handle click on an animal
   onAnimalClick(animal: any): void {
     console.log('Animal clicked:', animal);
-    localStorage.setItem(this.selectedAnimalKey, animal.name); // Save animal name in localStorage
-    this.selectedAnimalName = animal.name; // Update selected animal in the component
-    
+    this.animalSelectionService.setSelectedAnimal(animal.name); // Met à jour le service avec le nom de l'animal
   }
-
   // Load the selected animal from localStorage
   loadSelectedAnimal(): void {
     const savedAnimal = localStorage.getItem(this.selectedAnimalKey);
     if (savedAnimal) {
       this.selectedAnimalName = savedAnimal; // Set the selected animal name from localStorage
+      this.animalSelectionService.setSelectedAnimal(savedAnimal); // Mettre à jour via le service
     }
   }
 }

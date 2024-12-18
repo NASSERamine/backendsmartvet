@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimalsService } from '../services/animals.service';
 import { MedicationService } from '../services/medication.service';
@@ -9,6 +9,7 @@ import { AddMedicationComponent } from '../add-medication/add-medication.compone
 import { MouvementService } from '../services/mouvement.service';
 import { AnimalSelectionService } from '../services/animal-selection.service';
 import { Subscription } from 'rxjs';
+import { UpdateMedicationComponent } from '../update-medication/update-medication.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  @ViewChild(UpdateMedicationComponent) updateMedicationComponent!: UpdateMedicationComponent;
   temperature: string = '';
   heartRate: string = '';
   movement: string = '';
@@ -194,9 +196,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }
+
   editMedication(medication: any): void {
-    // Logic to edit the selected medication
-    console.log('Editing medication:', medication);
+    if (this.updateMedicationComponent) {
+      this.updateMedicationComponent.openModal();
+    }
   }
   
   deleteMedication(medicationId: number): void {

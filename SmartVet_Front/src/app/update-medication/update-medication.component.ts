@@ -16,9 +16,8 @@ export class UpdateMedicationComponent {
      
        // Open the modal
        openModal() {
-         this.isModalOpen = true;
-       }
-     
+        this.isModalOpen = true;
+      }
        // Close the modal
        closeModal() {
          this.isModalOpen = false;

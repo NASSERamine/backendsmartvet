@@ -1,0 +1,33 @@
+<p>update-medication works!</p>
+<!-- Modal structure -->
+<div class="modal" [ngClass]="{ 'is-visible': isModalOpen }">
+    <div class="modal-content">
+      <h2>Add Medication</h2>
+      <form (ngSubmit)="onSubmit()">
+        <label for="medicationName">Medication Name</label>
+        <input 
+          type="text" 
+          id="medicationName" 
+          name="medicationName" 
+          [(ngModel)]="medicationName" 
+          required 
+          #medicationNameInput="ngModel">
+        
+        <label for="medicationDetail">Details</label>
+        <input 
+          type="text" 
+          id="medicationDetail" 
+          name="medicationDetail" 
+          [(ngModel)]="medicationDetail" 
+          required 
+          #medicationDetailInput="ngModel">
+        
+        <button type="submit" [disabled]="!medicationNameInput.valid || !medicationDetailInput.valid">Update</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal overlay to display when open -->
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()"></div>
+  

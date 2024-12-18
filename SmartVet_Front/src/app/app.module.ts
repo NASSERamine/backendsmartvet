@@ -20,6 +20,7 @@ import { AddDeleteComponent } from './add-delete/add-delete.component';
 import { ProfilComponent } from './profil/profil.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AnimalProfilComponent } from './animal-profil/animal-profil.component';
+import { UpdateMedicationComponent } from './update-medication/update-medication.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AnimalProfilComponent } from './animal-profil/animal-profil.component';
     ProfilComponent,
     NotificationComponent,
     AnimalProfilComponent,
+    UpdateMedicationComponent,
     
   
 

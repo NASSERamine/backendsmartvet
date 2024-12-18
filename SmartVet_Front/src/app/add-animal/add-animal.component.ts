@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AddAnimalService } from '../services/add-animal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-animal',
@@ -10,7 +11,7 @@ export class AddAnimalComponent {
   animal = { name: '', type: '', age: 0, weight: 0 }; // Animal object with fields name, type, age, and weight
   message = '';
 
-  constructor(private addAnimalService: AddAnimalService) {}
+  constructor(private addAnimalService: AddAnimalService ,private router: Router) {}
 
   submitAnimal(): void {
     const userEmail = localStorage.getItem('email'); // Récupérer l'email de l'utilisateur depuis le localStorage
@@ -28,6 +29,7 @@ export class AddAnimalComponent {
       (response) => {
         this.message = 'Animal ajouté avec succès !';
         this.animal = { name: '', type: '', age: 0, weight: 0 }; // Réinitialiser le formulaire
+        this.router.navigate(['/dashboard']);
       },
       (error) => {
         console.error('Erreur lors de l\'ajout de l\'animal :', error);

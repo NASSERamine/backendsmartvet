@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-animal-profil',
@@ -6,11 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./animal-profil.component.css']
 })
 export class AnimalProfilComponent {
-  isEditMode: boolean = false;
+  @Input() isEditMode: boolean = false; // Input property for modal visibility
+  @Output() modalClose = new EventEmitter<void>(); // Event to notify parent component
 
-  // Original animal data
+  // Animal data
   animal = {
-    imageUrl: 'https://via.placeholder.com/150',
+    imageUrl: 'assets/Dog.png',
     name: 'Bella',
     weight: 25,
     age: 4,
@@ -20,17 +21,15 @@ export class AnimalProfilComponent {
   // Temporary copy for cancel functionality
   originalAnimal = { ...this.animal };
 
-  toggleEditMode(): void {
-    if (this.isEditMode) {
-      // Save changes
-      this.originalAnimal = { ...this.animal };
-    }
-    this.isEditMode = !this.isEditMode;
+  cancelEdit(): void {
+    // Restore original data and close modal
+    this.animal = { ...this.originalAnimal };
+    this.modalClose.emit();
   }
 
-  cancelEdit(): void {
-    // Restore original data
-    this.animal = { ...this.originalAnimal };
-    this.isEditMode = false;
+  closeModal(): void {
+    // Save changes and close modal
+    this.originalAnimal = { ...this.animal };
+    this.modalClose.emit();
   }
 }

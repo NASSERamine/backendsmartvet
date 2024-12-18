@@ -1,27 +1,65 @@
 /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    color: #333;
+.edit-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
   }
   
-  .profile-container {
-    max-width: 800px; /* Wider container */
-    margin: 30px auto;
-    padding: 30px;
+  .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Modal Overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Background dim */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Container */
+  .modal-container {
     background: #fff;
+    padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
   }
   
-  /* Header Section */
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Profile Container */
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .profile-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
+    align-items: center;
+    margin-bottom: 20px;
   }
   
   .profile-info {
@@ -30,45 +68,17 @@ body {
   }
   
   .profile-image img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    margin-right: 15px;
+    margin-right: 10px;
     object-fit: cover;
   }
   
-  .profile-info h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #000;
-  }
-  
-  .profile-info span {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .change-btn {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    padding: 6px 12px;
-    border-radius: 6px;
-    color: #333;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .change-btn:hover {
-    background-color: #e9e9e9;
-    border-color: #ccc;
-  }
-  
-  /* Form Section */
   .form-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 30px; /* Spacing between rows and columns */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
   
   .form-group {
@@ -78,71 +88,48 @@ body {
   
   .form-group label {
     font-size: 14px;
-    color: #666;
     margin-bottom: 5px;
   }
   
   .form-group input,
   .form-group select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 8px;
     font-size: 14px;
-    color: #333;
-    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 6px;
   }
   
-  .form-group input:focus,
-  .form-group select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-  }
-  
-  /* Footer Buttons */
   .profile-footer {
     display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
   }
   
   .cancel-btn,
   .save-btn {
-    padding: 10px 25px;
-    font-size: 14px;
-    border-radius: 6px;
+    padding: 8px 20px;
     border: none;
+    border-radius: 6px;
+    font-size: 14px;
     cursor: pointer;
-    transition: all 0.3s ease;
   }
   
   .cancel-btn {
-    background-color: #f4f4f4;
+    background-color: #f0f0f0;
     color: #333;
   }
   
   .cancel-btn:hover {
-    background-color: #e9e9e9;
+    background-color: #e0e0e0;
   }
   
   .save-btn {
-    background-color: #000;
+    background-color: #007bff;
     color: #fff;
   }
   
   .save-btn:hover {
-    background-color: #333;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .form-container {
-      grid-template-columns: 1fr; /* Stack fields vertically on smaller screens */
-    }
-  
-    .profile-header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+    background-color: #0056b3;
   }
   

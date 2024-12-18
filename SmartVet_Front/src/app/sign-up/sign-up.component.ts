@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importez Router
+import { Router } from '@angular/router';
 import { AuthService } from '../services/signup.service';
 
 @Component({
@@ -14,11 +14,11 @@ export class SignUpComponent {
   confirmPassword: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {} // Injectez Router ici
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSignUp(): void {
     if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Les mots de passe ne correspondent pas';
+      this.errorMessage = 'Les mots de passe ne correspondent pas.';
       return;
     }
 
@@ -31,8 +31,8 @@ export class SignUpComponent {
         console.log('Inscription réussie:', response);
         alert('Inscription réussie! Veuillez vous connecter.');
 
-        // Rediriger vers la page de login après une inscription réussie
-        this.router.navigate(['/login']); // Remplacez '/login' par le chemin correct de votre page de login
+        // Redirect to login page after successful registration
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.error('Erreur lors de l’inscription:', error);

@@ -15,41 +15,96 @@
         <h2 class="text-primary mb-4">Sign Up</h2>
         <p class="text-muted">Create your account</p>
 
-        <form (ngSubmit)="onSignUp()">
+        <form (ngSubmit)="onSignUp()" #signUpForm="ngForm">
           <!-- Name Field -->
           <div class="form-group mb-4">
             <label for="name" class="form-label text-muted"><i class="fas fa-user"></i> Full Name</label>
-            <input type="text" id="name" class="form-control" [(ngModel)]="name" name="name" placeholder="Enter your full name" required />
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              [(ngModel)]="name"
+              name="name"
+              placeholder="Enter your full name"
+              required
+              #nameField="ngModel"
+            />
+            <div *ngIf="nameField.invalid && nameField.touched" class="text-danger">
+              Name is required.
+            </div>
           </div>
-
+        
           <!-- Email Field -->
           <div class="form-group mb-4">
             <label for="email" class="form-label text-muted"><i class="fas fa-envelope"></i> Email</label>
-            <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Enter your email" required />
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              [(ngModel)]="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+              email
+              #emailField="ngModel"
+            />
+            <div *ngIf="emailField.invalid && emailField.touched" class="text-danger">
+              Please enter a valid email address.
+            </div>
           </div>
-
+        
           <!-- Password Field -->
           <div class="form-group mb-4">
             <label for="password" class="form-label text-muted"><i class="fas fa-lock"></i> Password</label>
-            <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Enter your password" required />
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              minlength="6"
+              #passwordField="ngModel"
+            />
+            <div *ngIf="passwordField.invalid && passwordField.touched" class="text-danger">
+              Password must be at least 6 characters long.
+            </div>
           </div>
-
+        
           <!-- Confirm Password Field -->
           <div class="form-group mb-4">
             <label for="confirmPassword" class="form-label text-muted"><i class="fas fa-lock"></i> Confirm Password</label>
-            <input type="password" id="confirmPassword" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required />
+            <input
+              type="password"
+              id="confirmPassword"
+              class="form-control"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              required
+              #confirmPasswordField="ngModel"
+            />
+            <div *ngIf="confirmPasswordField.invalid && confirmPasswordField.touched" class="text-danger">
+              Please confirm your password.
+            </div>
+            <div *ngIf="confirmPassword !== password && confirmPassword && confirmPasswordField.touched" class="text-danger">
+              Passwords do not match.
+            </div>
           </div>
-
+        
           <!-- Error Message -->
           <div *ngIf="errorMessage" class="alert alert-danger">
             {{ errorMessage }}
           </div>
-
+        
           <!-- Submit Button -->
           <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">Sign Up</button>
           </div>
         </form>
+        
+        
       </div>
     </div>
   </div>

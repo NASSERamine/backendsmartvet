@@ -199,9 +199,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     console.log('Editing medication:', medication);
   }
   
-  deleteMedication(medication: any): void {
-    // Logic to delete the selected medication
-    console.log('Deleting medication:', medication);
+  deleteMedication(medicationId: number): void {
+    if (confirm('Are you sure you want to delete this medication?')) {
+      this.medicationService.deleteMedication(medicationId.toString()).subscribe({
+        next: () => {
+          console.log(`Medication with ID ${medicationId} deleted successfully.`);
+          // Reload the medications list after successful deletion
+          this.loadMedications();
+        },
+        error: (err) => {
+          console.error('Error deleting medication:', err);
+          // Optional: Add user-friendly error handling, like a toast or alert
+        }
+      });
+    }
   }
-  
+
 }

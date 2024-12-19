@@ -28,7 +28,9 @@ export class LoginComponent {
           console.log('Connexion réussie. Bienvenue,', this.username);
   
           // Rediriger vers une page sécurisée (exemple : tableau de bord)
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/add-animal']);
+
+
         },
         (error) => {
           // Affichage d'un message d'erreur si la connexion échoue

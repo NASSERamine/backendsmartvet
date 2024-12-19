@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AnimalSelectionService } from '../services/animal-selection.service';
+import { AnimalsService } from '../services/animals.service';
 
 @Component({
   selector: 'app-animal-profil',
@@ -6,30 +8,52 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./animal-profil.component.css']
 })
 export class AnimalProfilComponent {
-  @Input() isEditMode: boolean = false; // Input property for modal visibility
-  @Output() modalClose = new EventEmitter<void>(); // Event to notify parent component
-
+  isModalOpen: boolean = false;
+  selectedAnimal: any = null;
   // Animal data
   animal = {
     imageUrl: 'assets/Dog.png',
-    name: 'Bella',
-    weight: 25,
-    age: 4,
+    name: 'Bobi',
+    weight: 2,
+    age: 2,
     type: 'Dog',
   };
-
+  constructor(
+    private animalsService: AnimalsService
+  ){}
+   
+  openModal(selectedAnimalName: string) {
+    this.isModalOpen = true;
+    this.selectedAnimal = this.animal;
+  }
   // Temporary copy for cancel functionality
   originalAnimal = { ...this.animal };
 
   cancelEdit(): void {
     // Restore original data and close modal
     this.animal = { ...this.originalAnimal };
-    this.modalClose.emit();
+    
   }
 
   closeModal(): void {
     // Save changes and close modal
     this.originalAnimal = { ...this.animal };
-    this.modalClose.emit();
+    
+    this.isModalOpen = false;
+  }
+  
+  updateSelectedAnimal(animalName: string) {
+    this.animalsService.getAnimalsForLoggedInUser().subscribe(
+      (animals) => {
+        const animal = animals.find((a: any) => a.name === animalName);
+        if (animal) {
+          this.selectedAnimal = animal;
+
+        }
+      },
+      (error) => {
+        console.error('Error fetching animals:', error);
+      }
+    );
   }
 }

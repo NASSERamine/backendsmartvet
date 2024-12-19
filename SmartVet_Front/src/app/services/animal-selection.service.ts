@@ -12,4 +12,7 @@ export class AnimalSelectionService {
     this.selectedAnimalSubject.next(animalName);
     localStorage.setItem('selectedAnimal', animalName); // Optionnel, sauvegarde dans localStorage
   }
+
+ 
+
 }

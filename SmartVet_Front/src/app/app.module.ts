@@ -16,7 +16,6 @@ import { ChatBotComponent } from './chat-bot/chat-bot.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { AddMedicationComponent } from './add-medication/add-medication.component';
-import { AddDeleteComponent } from './add-delete/add-delete.component';
 import { ProfilComponent } from './profil/profil.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AnimalProfilComponent } from './animal-profil/animal-profil.component';
@@ -35,7 +34,6 @@ import { UpdateMedicationComponent } from './update-medication/update-medication
     ChatBotComponent,
     StatisticsComponent,
     AddMedicationComponent,
-    AddDeleteComponent,
     ProfilComponent,
     NotificationComponent,
     AnimalProfilComponent,

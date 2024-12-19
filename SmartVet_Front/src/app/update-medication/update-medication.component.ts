@@ -11,12 +11,39 @@ export class UpdateMedicationComponent {
      isModalOpen: boolean = false;
        medicationName: string = '';
        medicationDetail: string = '';
-     
+       medicationId: string = '';
+       medications: any[] = [];
        constructor(private medicationService: MedicationService) {}
      
        // Open the modal
-       openModal() {
+       openModal(medicationId: number) {
         this.isModalOpen = true;
+        this.medicationId = medicationId.toString();
+      }
+
+
+
+      ngOnInit() {
+        this.fetchMedications(); // Fetch medications on component initialization
+      }
+    
+      // Fetch the list of medications
+      fetchMedications() {
+        this.medicationService.getAllMedications().subscribe({
+          next: (response) => {
+            this.medications = response;
+          },
+          error: (error: HttpErrorResponse) => {
+            console.error('Error fetching medications:', error.message);
+          }
+        });
+      }
+
+      editMedication(medication: any) {
+         // Convert to string
+        this.medicationName = medication.name;
+        this.medicationDetail = medication.details;
+        this.isModalOpen = true; // Open the modal
       }
        // Close the modal
        closeModal() {
@@ -29,13 +56,16 @@ export class UpdateMedicationComponent {
        onSubmit() {
          const medicationData = {
            name: this.medicationName,
-           details: this.medicationDetail
+           details: this.medicationDetail,
+          
          };
+         const  id=this.medicationId
      
-         this.medicationService.addMedication(medicationData).subscribe({
+         this.medicationService.updateMedication(id,medicationData).subscribe({
            next: (response) => {
              console.log('Medication added successfully:', response);
-             this.closeModal(); // Close the modal after success
+             this.closeModal(); 
+             this.fetchMedications();
            },
            error: (error: HttpErrorResponse) => {
              console.error('Error adding medication:', error.message);

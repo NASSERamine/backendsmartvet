@@ -28,8 +28,7 @@ export class SignUpComponent {
     // Call AuthService to register the user
     this.authService.register(this.name, this.email, this.password).subscribe(
       (response) => {
-        console.log('Inscription réussie:', response);
-        alert('Inscription réussie! Veuillez vous connecter.');
+        
 
         // Redirect to login page after successful registration
         this.router.navigate(['/login']);

@@ -10,6 +10,7 @@ import { MouvementService } from '../services/mouvement.service';
 import { AnimalSelectionService } from '../services/animal-selection.service';
 import { Subscription } from 'rxjs';
 import { UpdateMedicationComponent } from '../update-medication/update-medication.component';
+import { AnimalProfilComponent } from '../animal-profil/animal-profil.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -72,6 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.loadHeartRate();
     this.loadMedications();
     this.loadMovement();
+   
   }
 
   // Load the temperature
@@ -196,15 +198,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   openAddMedicationModal(addMedicationComponent: AddMedicationComponent) {
     addMedicationComponent.openModal();
   }
+  openAnimalProfil(animalprofilComponent: AnimalProfilComponent) {
+    animalprofilComponent.openModal(this.selectedAnimalName);
+  }
 
-  editMedication(medication: any): void {
+  editMedication(medicationId: number): void {
     if (this.updateMedicationComponent) {
-      this.updateMedicationComponent.openModal();
+      this.updateMedicationComponent.openModal(medicationId);
     }
   }
   
   deleteMedication(medicationId: number): void {
-    if (confirm('Are you sure you want to delete this medication?')) {
+    
       this.medicationService.deleteMedication(medicationId.toString()).subscribe({
         next: () => {
           console.log(`Medication with ID ${medicationId} deleted successfully.`);
@@ -216,7 +221,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           // Optional: Add user-friendly error handling, like a toast or alert
         }
       });
-    }
+    
   }
 
 }

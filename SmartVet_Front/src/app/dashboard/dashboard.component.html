@@ -74,8 +74,7 @@
             height="100"
           />
           <h5 class="fw-bold mb-1" id="name">{{ selectedAnimalName }}</h5>
-          <p class="text-muted mb-0" id="age">1 year old</p>
-          <button class="btn add-animal-button ms-3 fw-bold">update</button>
+          <button class="btn add-animal-button ms-3 fw-bold"  (click)="openAnimalProfil(animalprofil)">Profile</button>
         </div>
       </div>
       <div class="col-lg-2 col-md-6 mb-2 mt-4">
@@ -190,7 +189,7 @@
               >
                 <button
                   class="btn btn-link p-0 me-2"
-                  (click)="editMedication(medication)"
+                  (click)="editMedication(medication.id)"
                 >
                   <i class="fas fa-edit edit-icon"></i>
                 </button>
@@ -217,5 +216,6 @@
 
     <app-add-medication #addMedication></app-add-medication>
     <app-update-medication #updateMedModal></app-update-medication>
+    <app-animal-profil #animalprofil></app-animal-profil>
   </div>
 </div>

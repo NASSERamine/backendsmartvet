@@ -1,13 +1,13 @@
 <!-- Modal Container -->
-<div *ngIf="isEditMode" class="modal-overlay">
-    <div class="modal-container">
+<div class="modal" [ngClass]="{ 'is-visible': isModalOpen }">
+    <div class="modal-content">
       <!-- Modal Content -->
-      <div class="profile-container">
+    
         <!-- Header -->
         <div class="profile-header">
           <div class="profile-info">
             <div class="profile-image">
-              <img [src]="animal.imageUrl" alt="Animal Image" />
+              <img src="assets/Dog.png" alt="Animal Image" />
             </div>
             <div>
               <h3>{{ animal.name }}</h3>
@@ -46,7 +46,8 @@
           <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
           <button class="save-btn" (click)="closeModal()">Save</button>
         </div>
-      </div>
+      
     </div>
   </div>
   
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()"></div>
